@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+</head>
+<body>
+
+<div>
+    <h1>All Customers</h1>
+
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Streetname</th>
+           <th>City</th>
+            <th>zipcode</th>
+            <th>Country</th>
+            <th>email</th>
+            <th>phonenumber</th>
+            <th>Date of birth</th>
+            <th>Diverslicense</th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.firstName}"> </td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.addressStreetname}"></td>
+            <td th:text="${customer.addressCity}"></td>
+            <td th:text="${customer.addressZipcode}"></td>
+            <td th:text="${customer.addressCountry}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.phonenumber}"></td>
+            <td th:text="${customer.dob}"></td>
+            <td th:text="${customer.driverslicense}"></td>
+
+        </tr>
+
+    </table>
+</div>
+
+</body>
+</html>
