@@ -29,6 +29,11 @@ public class CustomerController {
 
     }
 
+    @GetMapping("/forside")
+    public String forside () {
+        return "forside";
+    }
+
     public void udpateCustomer(){
 
     }

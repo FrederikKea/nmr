@@ -3,10 +3,7 @@ package com.nmr.demo.Repository;
 import com.nmr.demo.Model.Customer;
 import com.nmr.demo.Util.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 public class CustomerRepository implements ICRUDRepository {
@@ -40,6 +37,10 @@ public class CustomerRepository implements ICRUDRepository {
             Statement stmt = conn.createStatement();
 
             //skal laves smarter i forhold til at den skal vide den bruger nmr databasen
+
+            //PreparedStatement ps = conn.prepareStatement(query);
+            //ResultSet rs = ps.executeQuery();
+
             ResultSet rs = stmt.executeQuery("use nmr");
             rs = stmt.executeQuery(query);
             return rs;
