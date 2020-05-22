@@ -4,9 +4,10 @@ import com.nmr.demo.Model.Customer;
 import com.nmr.demo.Util.DatabaseConnectionManager;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerRepository implements ICRUDRepository {
+public class CustomerRepository implements ICustomerRepository {
 
     private Connection conn;
 
@@ -15,54 +16,86 @@ public class CustomerRepository implements ICRUDRepository {
     }
 
     @Override
-    public void create(Object o) {
+    public void createCustomer(Customer c) {
 
     }
 
-
-
     @Override
-    public ResultSet readCustomers() {
+    public Customer readOneCustomer(int customer_id) {
+        Customer customerToReturn = new Customer();
         try {
-            String query = "SELECT customer_table.customer_id,customer_table.customer_first_name,customer_table.customer_last_name, \n" +
-                "address_table.address_streetname, address_table.address_city, address_table.address_zipcode,address_table.address_country,\n" +
-                "email_table.email,\n" +
-                "phonenumber_table.phonenumber,\n" +
-                "customer_dob,customer_driverslicense_id\n" +
-                "FROM customer_table\n" +
-                "INNER JOIN address_table ON customer_table.customer_id = address_table.address_id \n" +
-                "INNER JOIN email_table ON customer_table.customer_id = email_table.email_id\n" +
-                "INNER JOIN phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id";
-
-            Statement stmt = conn.createStatement();
-
-            //skal laves smarter i forhold til at den skal vide den bruger nmr databasen
-
-            //PreparedStatement ps = conn.prepareStatement(query);
-            //ResultSet rs = ps.executeQuery();
-
-            ResultSet rs = stmt.executeQuery("use nmr");
-            rs = stmt.executeQuery(query);
-            return rs;
+            String getCustomer = "SELECT customer_table.customer_id,customer_table.customer_first_name,customer_table.customer_last_name, " +
+                    "address_table.address_streetname, address_table.address_city, address_table.address_zipcode,address_table.address_country, " +
+                    "email_table.email, " +
+                    "phonenumber_table.phonenumber, "+
+                    "customer_dob,customer_driverslicense_id " +
+                    "FROM nmr.customer_table "+
+                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id WHERE customer_id=? ";
+            PreparedStatement myStatement = conn.prepareStatement(getCustomer);
+            myStatement.setInt(1,customer_id);
+            ResultSet rs = myStatement.executeQuery();
+            while (rs.next()) {
+                customerToReturn = new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getDate(10),
+                        rs.getString(11));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
-    }
-
-
-    @Override
-    public Object read(int id) {
-        return null;
+        return customerToReturn;
     }
 
     @Override
-    public boolean update(Object o) {
+    public List<Customer> readAllCustomers() {
+        List <Customer> allCustomers = new ArrayList<>();
+        try {
+            String getAllCustomer = "SELECT customer_table.customer_id,customer_table.customer_first_name,customer_table.customer_last_name, " +
+                    "address_table.address_streetname, address_table.address_city, address_table.address_zipcode,address_table.address_country, " +
+                    "email_table.email, " +
+                    "phonenumber_table.phonenumber, "+
+                    "customer_dob,customer_driverslicense_id " +
+                    "FROM nmr.customer_table "+
+                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id";
+            PreparedStatement myStatement = conn.prepareStatement(getAllCustomer);
+            ResultSet rs = myStatement.executeQuery();
+            while (rs.next()) {
+                allCustomers.add(new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getDate(10),
+                        rs.getString(11)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allCustomers;
+    }
+
+    @Override
+    public boolean updateCustomer(Customer c) {
         return false;
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean deleteCustomer(int id) {
         return false;
     }
 

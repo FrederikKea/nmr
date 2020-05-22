@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/update/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">
+    <label for="firstName">Fornavn</label>
+    <input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="ID">
+    <br>
+    <label for="lastName">Efternavn</label>
+    <input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="ID">
+    <br>
+    <label for="streetname">Gadenavn</label>
+    <input type="text" th:field="*{addressStreetname}" class="form-control" id="streetname" placeholder="ID">
+    <br>
+    <label for="city">Bynavn</label>
+    <input type="text" th:field="*{addressCity}" class="form-control" id="city" placeholder="ID">
+    <br>
+    <label for="zipcode">Postnummer</label>
+    <input type="text" th:field="*{addressZipcode}" class="form-control" id="zipcode" placeholder="ID">
+    <br>
+    <label for="country">Land</label>
+    <input type="text" th:field="*{addressCountry}" class="form-control" id="country" placeholder="ID">
+    <br>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="ID">
+    <br>
+    <label for="phonenumber">Telefonnummer</label>
+    <input type="text" th:field="*{phonenumber}" class="form-control" id="phonenumber" placeholder="ID">
+    <br>
+    <label for="dob">Fødselsdato</label>
+    <input type="date" th:field="*{dob}" class="form-control" id="dob" placeholder="ID">
+    <br>
+    <label for="driverslicense">Kørekortnummer</label>
+    <input type="text" th:field="*{driverslicense}" class="form-control" id="driverslicense" placeholder="ID">
+    <br>
+    <input type="submit" name="submit">
+
+</form>
+</body>
+</html>

@@ -33,7 +33,7 @@
             <td th:text="${customer.phonenumber}"></td>
             <td th:text="${customer.dob}"></td>
             <td th:text="${customer.driverslicense}"></td>
-
+            <td><a th:href="@{/edit/{id}(id=${customer.customer_id})}"><button>Rediger</button></a></td>
         </tr>
 
     </table>

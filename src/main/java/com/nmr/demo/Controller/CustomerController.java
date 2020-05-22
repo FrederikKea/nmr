@@ -1,9 +1,12 @@
 package com.nmr.demo.Controller;
 
+import com.nmr.demo.Model.Customer;
+import com.nmr.demo.Repository.CustomerRepository;
 import com.nmr.demo.Service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.SQLException;
 
@@ -22,11 +25,18 @@ public class CustomerController {
     }
 
     @GetMapping("/test")
-    public String readCustomers(Model model) throws SQLException {
+    public String readCustomers(Model model) {
         System.out.println("controllerlayer");
-        model.addAttribute("customers",cs.readCustomers());
+        model.addAttribute("customers",cs.readAllCustomers());
         return "test";
 
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+        Customer customer = cs.readOneCustomer(id);
+        model.addAttribute("customer", customer);
+        return "redigerkunde";
     }
 
     @GetMapping("/forside")
