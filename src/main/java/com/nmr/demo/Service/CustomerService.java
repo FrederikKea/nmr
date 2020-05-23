@@ -26,8 +26,8 @@ public class CustomerService {
         return allCustomers;
     }
 
-    public void udpateCustomer(){
-
+    public void updateCustomer(Customer c){
+        cr.updateCustomer(c);
     }
 
     public void deleteCustomer(){

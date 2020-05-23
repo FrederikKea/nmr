@@ -46,7 +46,7 @@ public class CustomerRepository implements ICustomerRepository {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getDate(10),
+                        rs.getDate(10).toString(),
                         rs.getString(11));
             }
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class CustomerRepository implements ICustomerRepository {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getDate(10),
+                        rs.getDate(10).toString(),
                         rs.getString(11)));
             }
         } catch (SQLException e) {
@@ -90,8 +90,35 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public boolean updateCustomer(Customer c) {
-        return false;
+    public void updateCustomer(Customer c) {
+        try {
+            String query = "UPDATE nmr.customer_table " +
+                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id " +
+                    "SET customer_first_name=?, customer_last_name=?, address_table.address_streetname=?" +
+                    ",address_table.address_city=?, address_table.address_zipcode=?," +
+                    "address_table.address_country=?,email_table.email=?,phonenumber_table.phonenumber=?,customer_dob=?" +
+                    ",customer_driverslicense_id=? WHERE customer_id=?";
+
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1,c.getFirstName());
+            preparedStatement.setString(2, c.getLastName());
+            preparedStatement.setString(3,c.getAddressStreetname());
+            preparedStatement.setString(4,c.getAddressCity());
+            preparedStatement.setInt(5,c.getAddressZipcode());
+            preparedStatement.setString(6,c.getAddressCountry());
+            preparedStatement.setString(7,c.getEmail());
+            preparedStatement.setString(8,c.getPhonenumber());
+            preparedStatement.setDate(9,java.sql.Date.valueOf(c.getDob()));
+            preparedStatement.setString(10,c.getDriverslicense());
+            preparedStatement.setInt(11,c.getCustomer_id());
+
+            preparedStatement.execute();
+            preparedStatement.close();
+        }catch (SQLException s){
+            s.printStackTrace();
+        }
     }
 
     @Override

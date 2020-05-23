@@ -6,7 +6,9 @@ import com.nmr.demo.Service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
 
@@ -39,14 +41,19 @@ public class CustomerController {
         return "redigerkunde";
     }
 
+    @PostMapping("/updateCustomer/{id}")
+    public String updateCustomer(@PathVariable("id") int id, @ModelAttribute Customer customer, Model model){
+        customer.setCustomer_id(id);
+        cs.updateCustomer(customer);
+        model.addAttribute("customer" , cs.readAllCustomers());
+        return "redirect:/test";
+    }
+
     @GetMapping("/forside")
     public String forside () {
         return "forside";
     }
 
-    public void udpateCustomer(){
-
-    }
 
     public void deleteCustomer(){
 

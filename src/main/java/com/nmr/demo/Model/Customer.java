@@ -2,8 +2,6 @@ package com.nmr.demo.Model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
-
 public class Customer {
     /*
     private int customer_id;
@@ -105,10 +103,10 @@ public class Customer {
     private String email;
     private String phonenumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")// needed for input field on html pages (in order to serve the right format)
-    private Date dob;
+    private String dob;
     private String driverslicense;
 
-    public Customer(int customer_id, String firstName, String lastName, String addressStreetname, String addressCity, int addressZipcode, String addressCountry, String email, String phonenumber, Date dob, String driverslicense) {
+    public Customer(int customer_id, String firstName, String lastName, String addressStreetname, String addressCity, int addressZipcode, String addressCountry, String email, String phonenumber, String dob, String driverslicense) {
         this.customer_id = customer_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -197,11 +195,11 @@ public class Customer {
         this.phonenumber = phonenumber;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

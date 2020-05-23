@@ -13,7 +13,7 @@ public interface ICustomerRepository<T> {
 
     Customer readOneCustomer(int id);
 
-    boolean updateCustomer(Customer c);
+    void updateCustomer(Customer c);
 
     boolean deleteCustomer(int id);
 }

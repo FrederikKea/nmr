@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" th:action="@{/update/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">
+<form action="#" th:action="@{/updateCustomer/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">
     <label for="firstName">Fornavn</label>
     <input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="ID">
     <br>
@@ -36,7 +36,7 @@
     <label for="driverslicense">Kørekortnummer</label>
     <input type="text" th:field="*{driverslicense}" class="form-control" id="driverslicense" placeholder="ID">
     <br>
-    <input type="submit" name="submit">
+    <input type="submit" name="submit" value="Opdater">
 
 </form>
 </body>
