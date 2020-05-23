@@ -10,14 +10,55 @@ import java.util.List;
 public class CustomerRepository implements ICustomerRepository {
 
     private Connection conn;
+    private PreparedStatement preparedStatement;
 
     public CustomerRepository(){
         this.conn = DatabaseConnectionManager.getDatabaseConnection();
     }
 
     @Override
-    public void createCustomer(Customer c) {
+    public void createCustomer(Customer customer) {
+        try {
+            String query = "INSERT INTO nmr.customer_table(customer_first_name, customer_last_name, customer_address_id, customer_email, customer_phonenumber_id, customer_dob, customer_driverslicense_id)" + "VALUES(?,?,?,?,?,?,?)";
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, customer.getFirstName());
+            preparedStatement.setString(2, customer.getLastName());
+            preparedStatement.setInt(3, 10);
+            preparedStatement.setInt(4, 10);
+            preparedStatement.setInt(5, 10);
+            preparedStatement.setDate(6,java.sql.Date.valueOf(customer.getDob()));
+            //preparedStatement.setString(6, "1995-08-23"/*new java.sql.Date(customer.getDob().getTime())*/);
+            preparedStatement.setString(7, customer.getDriverslicense());
 
+            preparedStatement.executeUpdate();
+
+            String query1 = "INSERT INTO nmr.address_table(address_streetname, address_city, address_zipcode, address_country)" + "VALUES(?,?,?,?);";
+            preparedStatement = conn.prepareStatement(query1);
+            preparedStatement.setString(1, customer.getAddressStreetname());
+            preparedStatement.setString(2, customer.getAddressCity());
+            preparedStatement.setInt(3, customer.getAddressZipcode());
+            preparedStatement.setString(4, customer.getAddressCountry());
+
+            preparedStatement.executeUpdate();
+
+            String queryEmailTable = "INSERT INTO nmr.email_table (email)" +
+                    "VALUES (?)";
+            preparedStatement = conn.prepareStatement(queryEmailTable);
+            preparedStatement.setString(1, customer.getEmail());
+
+            preparedStatement.executeUpdate();
+
+            String quertphonenumberTable = "INSERT INTO nmr.phonenumber_table (phonenumber)" +
+                    "VALUES (?)";
+            preparedStatement = conn.prepareStatement(quertphonenumberTable);
+            preparedStatement.setString(1, customer.getPhonenumber());
+
+            preparedStatement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

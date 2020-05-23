@@ -10,8 +10,8 @@ import java.util.List;
 public class CustomerService {
     CustomerRepository cr = new CustomerRepository();
 
-    public void createCustomer(){
-
+    public void createCustomer(Customer customer){
+        cr.createCustomer(customer);
     }
 
     public Customer readOneCustomer(int id){

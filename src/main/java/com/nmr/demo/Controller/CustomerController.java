@@ -18,8 +18,10 @@ public class CustomerController {
     CustomerService cs = new CustomerService();
 
 
-    public void createCustomer(){
-
+    @PostMapping("/addCustomer")
+    public String createCustomer(@ModelAttribute Customer customer){
+        cs.createCustomer(customer);
+        return "redirect:/test";
     }
 
     public void readOneCustomer(){

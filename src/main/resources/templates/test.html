@@ -6,6 +6,46 @@
 </head>
 <body>
 
+<div class="container">
+    <h1>Opret Customer</h1>
+
+    <form action="/addCustomer" method="post">
+        <label for="firstName">Fornavn</label>
+        <input type="text" name="firstName" id="firstName">
+        <br>
+        <label for="lastName">Efternavn</label>
+        <input type="text" name="lastName" id="lastName">
+        <br>
+        <label for="addressStreetname">Address</label>
+        <input type="text" name="addressStreetname" id="addressStreetname">
+        <br>
+        <label for="addressCity">By</label>
+        <input type="text" name="addressCity" id="addressCity">
+        <br>
+        <label for="addressZipcode">Postnr</label>
+        <input type="text" name="addressZipcode" id="addressZipcode">
+        <br>
+        <label for="addressCountry">Land</label>
+        <input type="text" name="addressCountry" id="addressCountry">
+        <br>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <br>
+        <label for="phonenumber">Mobil</label>
+        <input type="text" name="phonenumber" id="phonenumber">
+        <br>
+        <label for="dob">Dob</label>
+        <input type="date" name="dob" id="dob">
+        <br>
+        <label for="driverslicense">Kørekort</label>
+        <input type="text" name="driverslicense" id="driverslicense">
+        <br>
+
+        <input type="submit" name="submit">
+
+    </form>
+</div>
+
 <div>
     <h1>All Customers</h1>
 
@@ -14,7 +54,7 @@
             <th>First name</th>
             <th>Last name</th>
             <th>Streetname</th>
-           <th>City</th>
+            <th>City</th>
             <th>zipcode</th>
             <th>Country</th>
             <th>email</th>
