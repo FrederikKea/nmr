@@ -30,7 +30,7 @@ public class CustomerService {
         cr.updateCustomer(c);
     }
 
-    public void deleteCustomer(){
-
+    public void deleteCustomer(int customerId){
+        cr.deleteCustomer(customerId);
     }
 }

@@ -161,8 +161,16 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public boolean deleteCustomer(int id) {
-        return false;
+    public void deleteCustomer(int customer_Id) {
+        try{
+            String sql = "DELETE FROM nmr.customer_table WHERE customer_id=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1,customer_Id);
+            preparedStatement.execute();
+            preparedStatement.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
 }

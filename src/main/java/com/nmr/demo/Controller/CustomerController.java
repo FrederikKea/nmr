@@ -57,7 +57,11 @@ public class CustomerController {
     }
 
 
-    public void deleteCustomer(){
+    @GetMapping("/deleteCustomer/{id}")
+    public String deleteCustomer(@PathVariable int id){
+        System.out.println(id);
+        cs.deleteCustomer(id);
+        return "redirect:/test";
 
     }
 }

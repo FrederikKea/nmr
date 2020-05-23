@@ -15,5 +15,5 @@ public interface ICustomerRepository<T> {
 
     void updateCustomer(Customer c);
 
-    boolean deleteCustomer(int id);
+    void deleteCustomer(int id);
 }
