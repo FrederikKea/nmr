@@ -43,12 +43,19 @@ public class CustomerRepository implements ICustomerRepository {
 
             preparedStatement.executeUpdate();
 
-            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_id)" + "VALUES(LAST_INSERT_ID(),LAST_INSERT_ID(),LAST_INSERT_ID(),?,?,?,?)";
+            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_id)"
+                    + "VALUES((SELECT address_id FROM nmr.address_table WHERE address_streetname = ?)," +
+                    "(SELECT email_id FROM nmr.email_table WHERE email = ?)," +
+                    "(SELECT phonenumber_id FROM nmr.phonenumber_table WHERE phonenumber = ?)," +
+                    "?,?,?,?)";
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, customer.getFirstName());
-            preparedStatement.setString(2, customer.getLastName());
-            preparedStatement.setDate(3,java.sql.Date.valueOf(customer.getDob()));
-            preparedStatement.setString(4, customer.getDriverslicense());
+            preparedStatement.setString(1,customer.getAddressStreetname());
+            preparedStatement.setString(2,customer.getEmail());
+            preparedStatement.setString(3, customer.getPhonenumber());
+            preparedStatement.setString(4, customer.getFirstName());
+            preparedStatement.setString(5, customer.getLastName());
+            preparedStatement.setDate(6,java.sql.Date.valueOf(customer.getDob()));
+            preparedStatement.setString(7, customer.getDriverslicense());
             preparedStatement.executeUpdate();
 
 
