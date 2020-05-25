@@ -2,8 +2,9 @@ package com.nmr.demo.Service;
 
 import com.nmr.demo.Model.Customer;
 import com.nmr.demo.Repository.CustomerRepository;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class CustomerService {
 
     public void updateCustomer(Customer c){
         cr.updateCustomer(c);
+    }
+
+    public String validateandupdateCustomer(Customer customer, BindingResult binding, Model model){
+        if (binding.hasErrors()){
+            return "redigerkunde";
+        }
+        cr.updateCustomer(customer);
+        model.addAttribute("customer" , this.readAllCustomers());
+        return ("redirect:/test");
     }
 
     public void deleteCustomer(int customerId){

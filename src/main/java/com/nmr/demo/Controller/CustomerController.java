@@ -1,16 +1,16 @@
 package com.nmr.demo.Controller;
 
 import com.nmr.demo.Model.Customer;
-import com.nmr.demo.Repository.CustomerRepository;
 import com.nmr.demo.Service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.SQLException;
+import javax.validation.Valid;
 
 @Controller
 public class CustomerController {
@@ -44,11 +44,10 @@ public class CustomerController {
     }
 
     @PostMapping("/updateCustomer/{id}")
-    public String updateCustomer(@PathVariable("id") int id, @ModelAttribute Customer customer, Model model){
+    public String updateCustomer(@PathVariable("id") int id, @Valid @ModelAttribute Customer customer, BindingResult binding, Model model){
         customer.setCustomer_id(id);
-        cs.updateCustomer(customer);
-        model.addAttribute("customer" , cs.readAllCustomers());
-        return "redirect:/test";
+        String validateandupdate = cs.validateandupdateCustomer(customer, binding, model);
+        return validateandupdate;
     }
 
     @GetMapping("/forside")
