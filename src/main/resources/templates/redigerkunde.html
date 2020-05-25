@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rediger Kunde</title>
 </head>
 <body>
+<h1>Rediger Kunde</h1>
 <form action="#" th:action="@{/updateCustomer/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">
     <table>
         <tr>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret Kunde</title>
+</head>
+<body>
+<h1>Opret kunde</h1>
+
+<form action="#" th:action="@{/addCustomer}" th:object="${customer}" method="post">
+        <table>
+            <tr>
+                <td><label for="firstName">Fornavn</label></td>
+                <td><input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Fornavn"></td>
+                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
+            </tr>
+            <tr>
+                <td><label for="lastName">Efternavn</label></td>
+                <td><input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Efternavn"></td>
+                <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>
+            </tr>
+            <tr>
+                <td><label for="addressStreetname">Gadenavn</label></td>
+                <td><input type="text" th:field="*{addressStreetname}" class="form-control" id="addressStreetname" placeholder="Gadenavn"></td>
+                <td th:if="${#fields.hasErrors('addressStreetname')}" th:errors="*{addressStreetname}">Streetname Error</td>
+            </tr>
+            <tr>
+                <td><label for="addressCity">Bynavn</label></td>
+                <td><input type="text" th:field="*{addressCity}" class="form-control" id="addressCity" placeholder="Bynavn"></td>
+                <td th:if="${#fields.hasErrors('addressCity')}" th:errors="*{addressCity}">Cityname Error</td>
+            </tr>
+            <tr>
+                <td><label for="addressZipcode">Postnummer</label></td>
+                <td><input type="number" th:field="*{addressZipcode}" class="form-control" id="addressZipcode" placeholder="Postnummer" min="1" max="2147483647" required oninvalid="this.setCustomValidity('Indtast et gyldigt postnummer')" oninput="setCustomValidity('')"></td>
+                <td th:if="${#fields.hasErrors('addressZipcode')}" th:errors="*{addressZipcode}">Zipcode Error</td>
+            </tr>
+            <tr>
+                <td><label for="addressCountry">Land</label></td>
+                <td><input type="text" th:field="*{addressCountry}" class="form-control" id="addressCountry" placeholder="Land"></td>
+                <td th:if="${#fields.hasErrors('addressCountry')}" th:errors="*{addressCountry}">Country Error</td>
+            </tr>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+            </tr>
+            <tr>
+                <td><label for="phonenumber">Telefonnummer</label></td>
+                <td><input type="text" th:field="*{phonenumber}" class="form-control" id="phonenumber" placeholder="Telefonnummer"></td>
+                <td th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}">Phonenumber Error</td>
+            </tr>
+            <tr>
+                <td><label for="dob">Fødselsdato</label></td>
+                <td><input type="date" th:field="*{dob}" class="form-control" id="dob" placeholder="Fødselsdato" required oninvalid="this.setCustomValidity('Indtast en gyldig fødselsdato')" oninput="setCustomValidity('')"></td>
+                <td th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Date of Birth Error</td>
+            </tr>
+            <tr>
+                <td><label for="driverslicense">Kørekortnummer</label></td>
+                <td><input type="text" th:field="*{driverslicense}" class="form-control" id="driverslicense" placeholder="Kørekortnummer"></td>
+                <td th:if="${#fields.hasErrors('driverslicense')}" th:errors="*{driverslicense}">Driverslicense Error</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Opret"></td>
+            <tr>
+        </table>
+
+
+
+
+
+
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td><label for="firstName">Fornavn</label></td>-->
+<!--            <td><input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Fornavn"></td>-->
+<!--            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="lastName">Efternavn</label></td>-->
+<!--            <td><input type="text" name="lastName" id="lastName"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressStreetname">Address</label></td>-->
+<!--            <td><input type="text" name="addressStreetname" id="addressStreetname"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressCity">By</label></td>-->
+<!--            <td><input type="text" name="addressCity" id="addressCity"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressZipcode">Postnr</label></td>-->
+<!--            <td><input type="text" name="addressZipcode" id="addressZipcode"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressCountry">Land</label></td>-->
+<!--            <td><input type="text" name="addressCountry" id="addressCountry"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="email">Email</label></td>-->
+<!--            <td><input type="text" name="email" id="email"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="phonenumber">Mobil</label></td>-->
+<!--            <td><input type="text" name="phonenumber" id="phonenumber"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="dob">Dob</label></td>-->
+<!--            <td><input type="date" name="dob" id="dob"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="driverslicense">Kørekort</label></td>-->
+<!--            <td><input type="text" name="driverslicense" id="driverslicense"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td><input type="submit" name="submit"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+</form>
+
+
+
+
+
+<!--<form action="#" th:action="@{/updateCustomer/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td><label for="firstName">Fornavn</label></td>-->
+<!--            <td><input type="text" th:field="*{firstName}" class="form-control" id="firstName" placeholder="Fornavn"></td>-->
+<!--            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="lastName">Efternavn</label></td>-->
+<!--            <td><input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Efternavn"></td>-->
+<!--            <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Name Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressStreetname">Gadenavn</label></td>-->
+<!--            <td><input type="text" th:field="*{addressStreetname}" class="form-control" id="addressStreetname" placeholder="Gadenavn"></td>-->
+<!--            <td th:if="${#fields.hasErrors('addressStreetname')}" th:errors="*{addressStreetname}">Streetname Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressCity">Bynavn</label></td>-->
+<!--            <td><input type="text" th:field="*{addressCity}" class="form-control" id="addressCity" placeholder="Bynavn"></td>-->
+<!--            <td th:if="${#fields.hasErrors('addressCity')}" th:errors="*{addressCity}">Cityname Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressZipcode">Postnummer</label></td>-->
+<!--            <td><input type="number" th:field="*{addressZipcode}" class="form-control" id="addressZipcode" placeholder="Postnummer" min="1" max="2147483647" required oninvalid="this.setCustomValidity('Indtast et gyldigt postnummer')" oninput="setCustomValidity('')"></td>-->
+<!--            <td th:if="${#fields.hasErrors('addressZipcode')}" th:errors="*{addressZipcode}">Zipcode Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="addressCountry">Land</label></td>-->
+<!--            <td><input type="text" th:field="*{addressCountry}" class="form-control" id="addressCountry" placeholder="Land"></td>-->
+<!--            <td th:if="${#fields.hasErrors('addressCountry')}" th:errors="*{addressCountry}">Country Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="email">Email</label></td>-->
+<!--            <td><input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email"></td>-->
+<!--            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="phonenumber">Telefonnummer</label></td>-->
+<!--            <td><input type="text" th:field="*{phonenumber}" class="form-control" id="phonenumber" placeholder="Telefonnummer"></td>-->
+<!--            <td th:if="${#fields.hasErrors('phonenumber')}" th:errors="*{phonenumber}">Phonenumber Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="dob">Fødselsdato</label></td>-->
+<!--            <td><input type="date" th:field="*{dob}" class="form-control" id="dob" placeholder="Fødselsdato"></td>-->
+<!--            <td th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Date of Birth Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td><label for="driverslicense">Kørekortnummer</label></td>-->
+<!--            <td><input type="text" th:field="*{driverslicense}" class="form-control" id="driverslicense" placeholder="Kørekortnummer"></td>-->
+<!--            <td th:if="${#fields.hasErrors('driverslicense')}" th:errors="*{driverslicense}">Driverslicense Error</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td><input type="submit" name="submit" value="Opdater"></td>-->
+<!--        <tr>-->
+<!--    </table>-->
+<!--</form>-->
+</body>
+</html>

@@ -15,6 +15,15 @@ public class CustomerService {
         cr.createCustomer(customer);
     }
 
+    public String validateandcreateCustomer(Customer customer, BindingResult binding, Model model){
+        if (binding.hasErrors()){
+            return "opretkunde";
+        }
+        cr.createCustomer(customer);
+        model.addAttribute("customer" , this.readAllCustomers());
+        return ("redirect:/oversigtkunde");
+    }
+
     public Customer readOneCustomer(int id){
         Customer customer = new Customer();
         customer = cr.readOneCustomer(id);
@@ -37,7 +46,7 @@ public class CustomerService {
         }
         cr.updateCustomer(customer);
         model.addAttribute("customer" , this.readAllCustomers());
-        return ("redirect:/test");
+        return ("redirect:/oversigtkunde");
     }
 
     public void deleteCustomer(int customerId){

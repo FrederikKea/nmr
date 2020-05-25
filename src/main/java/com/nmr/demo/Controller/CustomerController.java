@@ -17,11 +17,25 @@ public class CustomerController {
 
     CustomerService cs = new CustomerService();
 
+    @GetMapping("oversigtkunde")
+    public String showAllCustomers(Model model) {
+        model.addAttribute("customers",cs.readAllCustomers());
+        return "oversigtkunde";
+    }
+
+    @GetMapping("opretkunde")
+    public String createFormCustomer (Model model){
+        model.addAttribute("customer",new Customer());
+        return "opretkunde";
+    }
 
     @PostMapping("/addCustomer")
-    public String createCustomer(@ModelAttribute Customer customer){
-        cs.createCustomer(customer);
-        return "redirect:/test";
+    public String createCustomer(@Valid @ModelAttribute Customer customer, BindingResult binding, Model model){
+        String validateandcreate = cs.validateandcreateCustomer(customer, binding, model);
+        return validateandcreate;
+
+        //cs.createCustomer(customer);
+        //return "redirect:/test";
     }
 
     public void readOneCustomer(){
