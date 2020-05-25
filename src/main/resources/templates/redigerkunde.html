@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td><label for="dob">Fødselsdato</label></td>
-            <td><input type="date" th:field="*{dob}" class="form-control" id="dob" placeholder="Fødselsdato"></td>
+            <td><input type="date" th:field="*{dob}" class="form-control" id="dob" placeholder="Fødselsdato" required oninvalid="this.setCustomValidity('Indtast en gyldig fødselsdato')" oninput="setCustomValidity('')"></td>
             <td th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Date of Birth Error</td>
         </tr>
         <tr>
