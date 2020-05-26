@@ -37,6 +37,14 @@ public class BookingRepository implements IBookingRepository {
 
     @Override
     public void deleteBooking(int id) {
-
+        try {
+            String sql = "DELETE FROM nmr.booking_table WHERE booking_id=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

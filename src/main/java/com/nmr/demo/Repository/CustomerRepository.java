@@ -169,15 +169,57 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public void deleteCustomer(int customer_Id) {
+        String sql;
+        int address_ID;
+        int email_ID;
+        int phone_ID;
         try{
-            String sql = "DELETE FROM nmr.customer_table WHERE customer_id=?";
+            sql = "SELECT customer_address_id, customer_email, customer_phonenumber_id  FROM nmr.customer_table WHERE customer_id=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1,customer_Id);
-            preparedStatement.execute();
-            preparedStatement.close();
+            ResultSet rs = preparedStatement.executeQuery();
+            rs.next();
+            address_ID = rs.getInt(1);
+            email_ID = rs.getInt(2);
+            phone_ID = rs.getInt(3);
+            try{
+                sql = "DELETE FROM nmr.customer_table WHERE customer_id=?";
+                preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setInt(1,customer_Id);
+                preparedStatement.execute();
+                preparedStatement.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            try{
+                sql = "DELETE FROM nmr.address_table WHERE address_id=?";
+                preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setInt(1,address_ID);
+                preparedStatement.execute();
+                preparedStatement.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            try{
+                sql = "DELETE FROM nmr.email_table WHERE email_id=?";
+                preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setInt(1,email_ID);
+                preparedStatement.execute();
+                preparedStatement.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            try{
+                sql = "DELETE FROM nmr.phonenumber_table WHERE phonenumber_id=?";
+                preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setInt(1,phone_ID);
+                preparedStatement.execute();
+                preparedStatement.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
         }catch(SQLException e){
             e.printStackTrace();
         }
     }
-
 }
