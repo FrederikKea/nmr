@@ -26,6 +26,17 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement.setString(1,booking.getComment());
             preparedStatement.executeUpdate();
 
+            String queryPickup_table = "INSERT INTO nmr.pickup_table (pickup_streetname)" +
+                    "VALUES (?)";
+            preparedStatement = conn.prepareStatement(queryPickup_table);
+            preparedStatement.setString(1,booking.getAddressRentalStart());
+            preparedStatement.executeUpdate();
+
+            String queryDropoff_table = "INSERT INTO nmr.dropoff_table (dropoff_streetname)" +
+                    "VALUES (?)";
+            preparedStatement = conn.prepareStatement(queryDropoff_table);
+            preparedStatement.setString(1,booking.getAddressRentalStop());
+            preparedStatement.executeUpdate();
 
             String queryBookingTable = "INSERT INTO nmr.booking_table (booking_motorhome_id, booking_pickup_id, booking_dropoff_id, booking_rentalstarttime,booking_rentalstoptime)" +
                     "VALUES((SELECT motorhome_id FROM nmr.motorhome_table WHERE motorhome_modelname = ?)," +
@@ -37,10 +48,10 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement = conn.prepareStatement(queryBookingTable);
             preparedStatement.setString(1,booking.getMotorhome());
             //preparedStatement.setString(1,"Sunlight V 66");
-            //preparedStatement.setString(4,booking.getAddressRentalStart());
-            preparedStatement.setString(2,"Æblehavevej 231");
-            //preparedStatement.setString(5,booking.getAddressRentalStop());
-            preparedStatement.setString(3,"Kiwivejen 24");
+            preparedStatement.setString(2,booking.getAddressRentalStart());
+            //preparedStatement.setString(2,"Æblehavevej 231");
+            preparedStatement.setString(3,booking.getAddressRentalStop());
+            //preparedStatement.setString(3,"Kiwivejen 24");
             //fra customer
             //preparedStatement.setDate(6,java.sql.Date.valueOf(customer.getDob()));
             //preparedStatement.setDate(2,java.sql.Date.valueOf(booking.getRentalStartTime()));
