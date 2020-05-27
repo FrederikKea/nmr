@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MotorhomeController {
 
-    MotorhomeService mr = new MotorhomeService();
+    MotorhomeService ms = new MotorhomeService();
 
 
     @GetMapping("oversigtmotorhome")
     public String showAllMotorhomes(Model model) {
-        model.addAttribute("motorhomes",mr.readAllMotorhomes());
+        model.addAttribute("motorhomes",ms.readAllMotorhomes());
         return "oversigtmotorhome";
     }
 

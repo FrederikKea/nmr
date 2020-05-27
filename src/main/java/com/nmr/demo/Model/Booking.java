@@ -13,10 +13,10 @@ public class Booking {
     private String rentalStopTime;
     private String addressRentalStart;
     private String addressRentalStop;
-    //private String extras;
+    private String extras;
     private String comment;
 
-    public Booking(int order_id, String customers, String motorhome, String rentalStartTime, String rentalStopTime, String addressRentalStart, String addressRentalStop, /*String extras, */String comment) {
+    public Booking(int order_id, String customers, String motorhome, String rentalStartTime, String rentalStopTime, String addressRentalStart, String addressRentalStop, String extras, String comment) {
         this.order_id = order_id;
         this.customers = customers;
         this.motorhome = motorhome;
@@ -24,7 +24,7 @@ public class Booking {
         this.rentalStopTime = rentalStopTime;
         this.addressRentalStart = addressRentalStart;
         this.addressRentalStop = addressRentalStop;
-        //this.extras = extras;
+        this.extras = extras;
         this.comment = comment;
     }
 
@@ -87,13 +87,13 @@ public class Booking {
         this.addressRentalStop = addressRentalStop;
     }
 
-//    public String getExtras() {
-//        return extras;
-//    }
-//
-//    public void setExtras(String extras) {
-//        this.extras = extras;
-//    }
+    public String getExtras() {
+        return extras;
+    }
+
+    public void setExtras(String extras) {
+        this.extras = extras;
+    }
 
     public String getComment() {
         return comment;

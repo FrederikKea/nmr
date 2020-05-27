@@ -15,6 +15,7 @@
         <th>Rental slut</th>
         <th>Pick up</th>
         <th>Drop off</th>
+        <th>Ekstra udstyr</th>
         <th>Kommentar</th>
     </tr>
 
@@ -26,6 +27,7 @@
         <td th:text="${booking.rentalStopTime}"></td>
         <td th:text="${booking.addressRentalStart}"></td>
         <td th:text="${booking.addressRentalStop}"></td>
+        <td th:text="${booking.extras}"></td>
         <td th:text="${booking.comment}"></td>
         <td><a th:href="@{/edit/{id}(id=${booking.order_id})}"><button>Rediger</button></a></td>
         <td><a th:href="@{/deleteCustomer/{id}(id=${booking.order_id})}"><button>Delete</button></a></td>
