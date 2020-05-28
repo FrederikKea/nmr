@@ -8,7 +8,6 @@
 <h1>Oversigt over bookings</h1>
 <table>
     <tr>
-        <th>Booking id</th>
         <th>Customer</th>
         <th>Motorhome</th>
         <th>Rental start</th>
@@ -24,7 +23,6 @@
     </tr>
 
     <tr th:each="booking : ${bookings}">
-        <td th:text="${booking.order_id}"></td>
         <td th:text="${booking.customers}"></td>
         <td th:text="${booking.motorhome}"></td>
         <td th:text="${booking.rentalStartTime}"></td>
@@ -37,7 +35,7 @@
         <td th:text="${booking.dropoffZipcode}"></td>
         <td th:text="${booking.extras}"></td>
         <td th:text="${booking.comment}"></td>
-        <td><a th:href="@{/edit/{id}(id=${booking.order_id})}"><button>Rediger</button></a></td>
+        <td><a th:href="@{/editBooking/{id}(id=${booking.order_id})}"><button>Rediger</button></a></td>
         <td><a th:href="@{/deleteCustomer/{id}(id=${booking.order_id})}"><button>Delete</button></a></td>
     </tr>
 

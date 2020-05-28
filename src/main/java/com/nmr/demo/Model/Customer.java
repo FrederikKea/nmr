@@ -32,6 +32,8 @@ public class Customer {
     @Pattern(regexp="^[0-9]{1,255}",message="vælg et kørekortnummer mellem 1-255 karakterer")
     private String driverslicense;
 
+
+
     public Customer(int customer_id, @Pattern(regexp = "^[ÆØÅæøåa-zA-Z]{2,255}", message = "vælg et navn mellem 2-255 bogstaver") String firstName, @Pattern(regexp = "^[ÆØÅæøåa-zA-Z]{2,255}", message = "vælg et navn mellem 2-255 bogstaver") String lastName, @Pattern(regexp = "^[ ÆØÅæøåa-zA-Z0-9]{2,255}", message = "vælg et gadenavn mellem 2-255 bogstaver") String addressStreetname, @Pattern(regexp = "^[ ÆØÅæøåa-zA-Z]{2,255}", message = "vælg et bynavn mellem 2-255 bogstaver") String addressCity, @Range(min = 1, max = 2147483647, message = "vælg et gyldigt postnummer") int addressZipcode, @Pattern(regexp = "^[ ÆØÅæøåa-zA-Z]{2,255}", message = "vælg et landenavn mellem 2-255 bogstaver") String addressCountry, @NotBlank(message = "vælg en gyldig email") @Email(message = "vælg en gyldig email") String email, @Pattern(regexp = "^[0-9]{6,255}", message = "vælg et telefonnummer mellem 6-255 karakterer") String phonenumber, String dob, @Pattern(regexp = "^[0-9]{1,255}", message = "vælg et kørekortnummer mellem 1-255 karakterer") String driverslicense) {
         this.customer_id = customer_id;
         this.firstName = firstName;
@@ -45,6 +47,8 @@ public class Customer {
         this.dob = dob;
         this.driverslicense = driverslicense;
     }
+
+
 
     public Customer() {
     }

@@ -75,14 +75,6 @@ public class BookingRepository implements IBookingRepository {
         }
     }
 
-    /*
-    @Override
-    public List<Booking> readAllBookings() {
-        return null;
-    }
-*/
-
-
 
     @Override
     public List<Booking> readAllBookings() {
@@ -138,13 +130,87 @@ public class BookingRepository implements IBookingRepository {
 
 
     @Override
-    public Booking readOneBooking(int id) {
-        return null;
+    public Booking readOneBooking(int order_id) {
+        Booking bookingToReturn = new Booking();
+        try{
+            String readOneBooking = "SELECT nmr.order_table.order_id, customer_table.customer_first_name, motorhome_table.motorhome_modelname, " +
+                    "booking_table.booking_rentalstarttime, booking_table.booking_rentalstoptime, pickup_table.pickup_streetname, " +
+                    "pickup_table.pickup_city, pickup_table.pickup_zipcode, dropoff_table.dropoff_streetname, " +
+                    "dropoff_table.dropoff_city, dropoff_table.dropoff_zipcode, extras_table.extras_description, info_table.info_comment " +
+                    "FROM nmr.order_table" +
+                    "INNER JOIN nmr.customer_table ON order_customer_id = customer_id" +
+                    "INNER JOIN nmr.motorhome_table ON order_motorhome_id = motorhome_id" +
+                    "INNER JOIN nmr.booking_table ON order_booking_id = booking_id" +
+                    "INNER JOIN nmr.pickup_table ON order_pickup_id = pickup_id" +
+                    "INNER JOIN nmr.dropoff_table ON order_dropoff_id = dropoff_id" +
+                    "INNER JOIN nmr.extras_table ON order_extras_id = extras_id" +
+                    "INNER JOIN nmr.info_table ON order_info_id = info_id" +
+                    "WHERE order_id=?";
+            /*
+            *  PreparedStatement myStatement = conn.prepareStatement(getCustomer);
+            myStatement.setInt(1,customer_id);
+            ResultSet rs = myStatement.executeQuery();
+            while (rs.next()) {
+                customerToReturn = new Customer(rs.getInt(1),*/
+            PreparedStatement myStatement = conn.prepareStatement(readOneBooking);
+            myStatement.setInt(1,order_id);
+            ResultSet rs = myStatement.executeQuery();
+            while (rs.next()) {
+                bookingToReturn = new Booking(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDate(4).toString(),
+                        rs.getDate(5).toString(),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookingToReturn;
     }
 
     @Override
     public void updateBooking(Booking b) {
+        try {
+            String query = "UPDATE FROM nmr.order_table" +
+                    "INNER JOIN customer_table ON order_customer_id = customer_id" +
+                    "INNER JOIN motorhome_table ON order_motorhome_id = motorhome_id" +
+                    "INNER JOIN booking_table ON order_booking_id = booking_id" +
+                    "INNER JOIN pickup_table ON order_pickup_id = pickup_id" +
+                    "INNER JOIN dropoff_table ON order_dropoff_id = dropoff_id" +
+                    "INNER JOIN info_table ON order_info_id = info_id" +
+                    "INNER JOIN extras_table ON order_extras_id = extras_id" +
+                    "SET customer_first_name=?, motorhome_modelname =?, booking_rentalstarttime=?, booking_rentalstoptime=?, pickup_streetname=?, pickup_city=?, pickup_zipcode=?, dropoff_streetname=?, dropoff_city=?, dropoff_zipcode=?, extras_description=?, info_table=?" +
+                    "WHERE order_id=?";
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, b.getCustomers());
+            preparedStatement.setString(2, b.getMotorhome());
+            preparedStatement.setString(3, b.getRentalStartTime());
+            preparedStatement.setString(4, b.getRentalStopTime());
+            preparedStatement.setString(5, b.getPickupStreetname());
+            preparedStatement.setString(6, b.getPickupCity());
+            preparedStatement.setString(7, b.getPickupZipcode());
+            preparedStatement.setString(8, b.getDropoffStreetname());
+            preparedStatement.setString(9, b.getDropoffCity());
+            preparedStatement.setString(10, b.getDropoffZipcode());
+            preparedStatement.setString(11, b.getExtras());
+            preparedStatement.setString(12, b.getComment());
+            preparedStatement.setInt(13, b.getOrder_id());
 
+            preparedStatement.execute();
+            preparedStatement.close();
+        }catch (SQLException s){
+            s.printStackTrace();
+        }
     }
 
     @Override

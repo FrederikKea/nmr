@@ -1,5 +1,7 @@
 package com.nmr.demo;
 
+import com.nmr.demo.Model.Booking;
+import com.nmr.demo.Service.BookingService;
 import com.nmr.demo.Util.DatabaseConnectionManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +16,14 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+        /*
+        BookingService bookingService = new BookingService();
+         */
+
+        /*
+        Booking booking = new Booking();
+        booking = bookingService.readOneBooking(1);
+        System.out.println(booking.toString());*/
 
 
     }

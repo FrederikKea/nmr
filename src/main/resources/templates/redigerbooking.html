@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rediger Booking</title>
+</head>
+<body>
+<h1>Rediger Booking</h1>
+<form action="#" th:action="@{/updateBooking/{id}(id=${booking.order_id})}" th:object="${booking}" method="post">
+    <table>
+        <tr>
+            <td><label for="customers">Fornavn</label></td>
+            <td><input type="text" th:field="*{customers}" class="form-control" id="customers" placeholder="Fornavn"></td>
+            <td th:if="${#fields.hasErrors('customers')}" th:errors="*{customers}">Name Error</td>
+        </tr>
+
+        <tr>
+            <td><label for="motorhome">Motorhome</label></td>
+            <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>
+            <td th:if="${#fields.hasErrors('motorhome')}" th:errors="*{motorhome}">Name Error</td>
+        </tr>
+        <tr>
+            <td><label for="rentalStartTime">Startdato</label></td>
+            <td><input type="text" th:field="*{rentalStartTime}" class="form-control" id="rentalStartTime" placeholder="Startdato"></td>
+            <td th:if="${#fields.hasErrors('rentalStartTime')}" th:errors="*{rentalStartTime}">Streetname Error</td>
+        </tr>
+        <tr>
+            <td><label for="rentalStopTime">Slutdato</label></td>
+            <td><input type="text" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato"></td>
+            <td th:if="${#fields.hasErrors('rentalStopTime')}" th:errors="*{rentalStopTime}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupStreetname">Leveringsaddresse</label></td>
+            <td><input type="text" th:field="*{pickupStreetname}" class="form-control" id="pickupStreetname" placeholder="Leveringsaddresse"></td>
+            <td th:if="${#fields.hasErrors('pickupStreetname')}" th:errors="*{pickupStreetname}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupCity">By</label></td>
+            <td><input type="text" th:field="*{pickupCity}" class="form-control" id="pickupCity" placeholder="By"></td>
+            <td th:if="${#fields.hasErrors('pickupCity')}" th:errors="*{pickupCity}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupZipcode">Postnummer</label></td>
+            <td><input type="number" th:field="*{pickupZipcode}" class="form-control" id="pickupZipcode" placeholder="Postnummer"></td>
+            <td th:if="${#fields.hasErrors('pickupZipcode')}" th:errors="*{pickupZipcode}">Zipcode Error</td>
+        </tr>
+        <tr>
+            <td><label for="dropoffStreetname">Afleveringsaddresse</label></td>
+            <td><input type="text" th:field="*{dropoffStreetname}" class="form-control" id="dropoffStreetname" placeholder="Afleveringsaddresse"></td>
+            <td th:if="${#fields.hasErrors('dropoffStreetname')}" th:errors="*{dropoffStreetname}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="dropoffCity">By</label></td>
+            <td><input type="text" th:field="*{dropoffCity}" class="form-control" id="dropoffCity" placeholder="By"></td>
+            <td th:if="${#fields.hasErrors('dropoffCity')}" th:errors="*{dropoffCity}">Cityname Error</td>
+        </tr>
+        <!-- min="1" max="2147483647" required oninvalid="this.setCustomValidity('Indtast et gyldigt postnummer')" oninput="setCustomValidity('')"-->
+        <tr>
+            <td><label for="dropoffZipcode">Postnummer</label></td>
+            <td><input type="number" th:field="*{dropoffZipcode}" class="form-control" id="dropoffZipcode" placeholder="Postnummer"></td>
+            <td th:if="${#fields.hasErrors('dropoffZipcode')}" th:errors="*{dropoffZipcode}">Zipcode Error</td>
+        </tr>
+
+        <tr>
+            <td><label for="extras">Ekstra</label></td>
+            <td><input type="extras" th:field="*{extras}" class="form-control" id="extras" placeholder="Ekstra" ></td>
+            <td th:if="${#fields.hasErrors('extras')}" th:errors="*{extras}">Date of Birth Error</td>
+        </tr>
+        <tr>
+            <td><label for="comment">Kommentar</label></td>
+            <td><input type="text" th:field="*{comment}" class="form-control" id="comment" placeholder="Kommentar"></td>
+            <td th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Driverslicense Error</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="submit" value="Opdater"></td>
+        <tr>
+    </table>
+</form>
+</body>
+</html>
