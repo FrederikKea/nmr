@@ -11,19 +11,27 @@ public class Booking {
     @DateTimeFormat(pattern = "yyyy-MM-dd")// needed for input field on html pages (in order to serve the right format)
     private String rentalStartTime;
     private String rentalStopTime;
-    private String addressRentalStart;
-    private String addressRentalStop;
+    private String pickupStreetname;
+    private String pickupCity;
+    private String pickupZipcode;
+    private String dropoffStreetname;
+    private String dropoffCity;
+    private String dropoffZipcode;
     private String extras;
     private String comment;
 
-    public Booking(int order_id, String customers, String motorhome, String rentalStartTime, String rentalStopTime, String addressRentalStart, String addressRentalStop, String extras, String comment) {
+    public Booking(int order_id, String customers, String motorhome, String rentalStartTime, String rentalStopTime, String pickupStreetname, String pickupCity, String pickupZipcode, String dropoffStreetname, String dropoffCity, String dropoffZipcode, String extras, String comment) {
         this.order_id = order_id;
         this.customers = customers;
         this.motorhome = motorhome;
         this.rentalStartTime = rentalStartTime;
         this.rentalStopTime = rentalStopTime;
-        this.addressRentalStart = addressRentalStart;
-        this.addressRentalStop = addressRentalStop;
+        this.pickupStreetname = pickupStreetname;
+        this.pickupCity = pickupCity;
+        this.pickupZipcode = pickupZipcode;
+        this.dropoffStreetname = dropoffStreetname;
+        this.dropoffCity = dropoffCity;
+        this.dropoffZipcode = dropoffZipcode;
         this.extras = extras;
         this.comment = comment;
     }
@@ -71,20 +79,52 @@ public class Booking {
         this.rentalStopTime = rentalStopTime;
     }
 
-    public String getAddressRentalStart() {
-        return addressRentalStart;
+    public String getPickupStreetname() {
+        return pickupStreetname;
     }
 
-    public void setAddressRentalStart(String addressRentalStart) {
-        this.addressRentalStart = addressRentalStart;
+    public void setPickupStreetname(String pickupStreetname) {
+        this.pickupStreetname = pickupStreetname;
     }
 
-    public String getAddressRentalStop() {
-        return addressRentalStop;
+    public String getPickupCity() {
+        return pickupCity;
     }
 
-    public void setAddressRentalStop(String addressRentalStop) {
-        this.addressRentalStop = addressRentalStop;
+    public void setPickupCity(String pickupCity) {
+        this.pickupCity = pickupCity;
+    }
+
+    public String getPickupZipcode() {
+        return pickupZipcode;
+    }
+
+    public void setPickupZipcode(String pickupZipcode) {
+        this.pickupZipcode = pickupZipcode;
+    }
+
+    public String getDropoffStreetname() {
+        return dropoffStreetname;
+    }
+
+    public void setDropoffStreetname(String dropoffStreetname) {
+        this.dropoffStreetname = dropoffStreetname;
+    }
+
+    public String getDropoffCity() {
+        return dropoffCity;
+    }
+
+    public void setDropoffCity(String dropoffCity) {
+        this.dropoffCity = dropoffCity;
+    }
+
+    public String getDropoffZipcode() {
+        return dropoffZipcode;
+    }
+
+    public void setDropoffZipcode(String dropoffZipcode) {
+        this.dropoffZipcode = dropoffZipcode;
     }
 
     public String getExtras() {

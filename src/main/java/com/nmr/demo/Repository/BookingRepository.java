@@ -26,53 +26,47 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement.setString(1,booking.getComment());
             preparedStatement.executeUpdate();
 
-            String queryPickup_table = "INSERT INTO nmr.pickup_table (pickup_streetname)" +
-                    "VALUES (?)";
+            String queryPickup_table = "INSERT INTO nmr.pickup_table (pickup_streetname, pickup_city, pickup_zipcode)" +
+                    "VALUES (?,?,?)";
             preparedStatement = conn.prepareStatement(queryPickup_table);
-            preparedStatement.setString(1,booking.getAddressRentalStart());
+            preparedStatement.setString(1,booking.getPickupStreetname());
+            preparedStatement.setString(2,booking.getPickupCity());
+            preparedStatement.setString(3,booking.getPickupZipcode());
             preparedStatement.executeUpdate();
 
-            String queryDropoff_table = "INSERT INTO nmr.dropoff_table (dropoff_streetname)" +
-                    "VALUES (?)";
+
+            String queryDropoff_table = "INSERT INTO nmr.dropoff_table (dropoff_streetname, dropoff_city, dropoff_zipcode)" +
+                    "VALUES (?,?,?)";
             preparedStatement = conn.prepareStatement(queryDropoff_table);
-            preparedStatement.setString(1,booking.getAddressRentalStop());
+            preparedStatement.setString(1,booking.getDropoffStreetname());
+            preparedStatement.setString(2,booking.getDropoffCity());
+            preparedStatement.setString(3,booking.getDropoffZipcode());
             preparedStatement.executeUpdate();
 
-            String queryBookingTable = "INSERT INTO nmr.booking_table (booking_motorhome_id, booking_pickup_id, booking_dropoff_id, booking_rentalstarttime,booking_rentalstoptime)" +
-                    "VALUES((SELECT motorhome_id FROM nmr.motorhome_table WHERE motorhome_modelname = ?)," +
-                    "(SELECT pickup_id FROM nmr.pickup_table WHERE pickup_streetname = ?)," +
-                    "(SELECT dropoff_id FROM nmr.dropoff_table WHERE dropoff_streetname = ?)," +
-                    "?,?)";
 
-
+            String queryBookingTable = "INSERT INTO nmr.booking_table (booking_rentalstarttime,booking_rentalstoptime)" +
+                    "VALUES (?,?)";
             preparedStatement = conn.prepareStatement(queryBookingTable);
-            preparedStatement.setString(1,booking.getMotorhome());
-            //preparedStatement.setString(1,"Sunlight V 66");
-            preparedStatement.setString(2,booking.getAddressRentalStart());
-            //preparedStatement.setString(2,"Æblehavevej 231");
-            preparedStatement.setString(3,booking.getAddressRentalStop());
-            //preparedStatement.setString(3,"Kiwivejen 24");
-            //fra customer
-            //preparedStatement.setDate(6,java.sql.Date.valueOf(customer.getDob()));
-            //preparedStatement.setDate(2,java.sql.Date.valueOf(booking.getRentalStartTime()));
-            preparedStatement.setDate(4,java.sql.Date.valueOf("1995-06-22"));
-            //preparedStatement.setDate(3,java.sql.Date.valueOf(booking.getRentalStopTime()));
-            preparedStatement.setDate(5,java.sql.Date.valueOf("1995-06-22"));
+            preparedStatement.setDate(1,java.sql.Date.valueOf(booking.getRentalStartTime()));
+            preparedStatement.setDate(2,java.sql.Date.valueOf("1995-06-23"));
             preparedStatement.executeUpdate();
 
-            String queryOrderTable = "INSERT INTO nmr.order_table(order_customer_id, order_extras_id, order_info_id, order_booking_id)" +
+            String queryOrderTable = "INSERT INTO nmr.order_table(order_customer_id, order_extras_id, order_info_id, order_booking_id,order_pickup_id, order_dropoff_id,order_motorhome_id)" +
                     "VALUES((SELECT customer_id FROM nmr.customer_table WHERE customer_first_name = ?)," +
                     "(SELECT extras_id FROM nmr.extras_table WHERE extras_description = ?)," +
                     "(SELECT info_id FROM nmr.info_table WHERE info_comment = ?)," +
-                    "(SELECT booking_id FROM nmr.booking_table WHERE booking_rentalstarttime = ?))";
+                    "(SELECT booking_id FROM nmr.booking_table WHERE booking_rentalstarttime = ?)," +
+                    "(SELECT pickup_id FROM nmr.pickup_table WHERE pickup_streetname = ?)," +
+                    "(SELECT dropoff_id FROM nmr.dropoff_table WHERE dropoff_streetname = ?)," +
+                    "(SELECT motorhome_id FROM nmr.motorhome_table WHERE motorhome_modelname = ?))";
             preparedStatement = conn.prepareStatement(queryOrderTable);
             preparedStatement.setString(1, booking.getCustomers());
-            //preparedStatement.setString(1, "David");
             preparedStatement.setString(2, booking.getExtras());
-            //preparedStatement.setString(3, booking.getComment());
-            preparedStatement.setString(3, "test2");
-            //preparedStatement.setDate(4, java.sql.Date.valueOf(booking.getRentalStartTime()));
-            preparedStatement.setDate(4, java.sql.Date.valueOf("2021-12-16"));
+            preparedStatement.setString(3, booking.getComment());
+            preparedStatement.setDate(4, java.sql.Date.valueOf(booking.getRentalStartTime()));
+            preparedStatement.setString(5,booking.getPickupStreetname());
+            preparedStatement.setString(6,booking.getDropoffStreetname());
+            preparedStatement.setString(7,booking.getMotorhome());
             preparedStatement.executeUpdate();
 
 
@@ -81,6 +75,12 @@ public class BookingRepository implements IBookingRepository {
         }
     }
 
+    @Override
+    public List<Booking> readAllBookings() {
+        return null;
+    }
+
+/*
 
     @Override
     public List<Booking> readAllBookings() {
@@ -121,6 +121,7 @@ public class BookingRepository implements IBookingRepository {
         }
         return allBookings;
     }
+    */
 
     @Override
     public Booking readOneBooking(int id) {
