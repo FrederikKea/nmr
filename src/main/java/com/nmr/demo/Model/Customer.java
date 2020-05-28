@@ -23,7 +23,7 @@ public class Customer {
     @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg et landenavn mellem 2-255 bogstaver")
     private String addressCountry;
     @NotBlank(message="vælg en gyldig email")
-    @Email(message="vælg en gyldig email")
+    @Pattern(regexp = "^[a-zA-Z0-9_]+@[a-zA-Z0-9_]+\\.\\w+", message="vælg en gyldig email")
     private String email;
     @Pattern(regexp="^[0-9]{6,255}",message="vælg et telefonnummer mellem 6-255 karakterer")
     private String phonenumber;
