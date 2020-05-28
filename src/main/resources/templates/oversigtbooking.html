@@ -13,8 +13,12 @@
         <th>Motorhome</th>
         <th>Rental start</th>
         <th>Rental slut</th>
-        <th>Pick up</th>
-        <th>Drop off</th>
+        <th>Pick up street</th>
+        <th>Pick up city</th>
+        <th>Pick up zipcode</th>
+        <th>Dropoff street</th>
+        <th>Dropoff city</th>
+        <th>Dropoff zipcode</th>
         <th>Ekstra udstyr</th>
         <th>Kommentar</th>
     </tr>
@@ -25,8 +29,12 @@
         <td th:text="${booking.motorhome}"></td>
         <td th:text="${booking.rentalStartTime}"></td>
         <td th:text="${booking.rentalStopTime}"></td>
-        <td th:text="${booking.addressRentalStart}"></td>
-        <td th:text="${booking.addressRentalStop}"></td>
+        <td th:text="${booking.pickupStreetname}"></td>
+        <td th:text="${booking.pickupCity}"></td>
+        <td th:text="${booking.pickupZipcode}"></td>
+        <td th:text="${booking.dropoffStreetname}"></td>
+        <td th:text="${booking.dropoffCity}"></td>
+        <td th:text="${booking.dropoffZipcode}"></td>
         <td th:text="${booking.extras}"></td>
         <td th:text="${booking.comment}"></td>
         <td><a th:href="@{/edit/{id}(id=${booking.order_id})}"><button>Rediger</button></a></td>

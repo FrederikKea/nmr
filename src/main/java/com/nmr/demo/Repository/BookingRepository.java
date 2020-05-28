@@ -75,33 +75,43 @@ public class BookingRepository implements IBookingRepository {
         }
     }
 
+    /*
     @Override
     public List<Booking> readAllBookings() {
         return null;
     }
+*/
 
-/*
+
 
     @Override
     public List<Booking> readAllBookings() {
         List <Booking> allBookings = new ArrayList<>();
         try {
             String getAllBookings =
-                    "SELECT " +
-                            "booking_table.booking_id,\n" +
+                    "SELECT order_table.order_id,\n" +
                             "customer_table.customer_first_name,\n" +
                             "motorhome_table.motorhome_modelname,\n" +
-                            "booking_rentalstarttime,\n" +
-                            "booking_rentalstoptime,\n" +
-                            "booking_pickup_id,\n" +
-                            "booking_dropoff_id,\n" +
+                            "booking_table.booking_rentalstarttime,\n" +
+                            "booking_table.booking_rentalstoptime,\n" +
+                            "motorhome_table.motorhome_modelname,\n" +
+                            "pickup_table.pickup_streetname,\n" +
+                            "pickup_table.pickup_city,\n" +
+                            "pickup_table.pickup_zipcode,\n" +
+                            "dropoff_table.dropoff_streetname,\n" +
+                            "dropoff_table.dropoff_city,\n" +
+                            "dropoff_table.dropoff_zipcode,\n" +
                             "extras_table.extras_description,\n" +
                             "info_table.info_comment\n" +
-                            "FROM nmr.booking_table\n" +
-                            "INNER JOIN nmr.customer_table ON booking_table.booking_id = customer_table.customer_id\n" +
-                            "INNER JOIN nmr.motorhome_table ON booking_table.booking_id = motorhome_table.motorhome_id\n" +
-                            "INNER JOIN nmr.info_table ON booking_table.booking_id = info_table.info_id\n" +
-                            "INNER JOIN nmr.extras_table ON booking_table.booking_id = extras_table.extras_id";
+                            "FROM nmr.order_table\n" +
+                            "INNER JOIN nmr.customer_table ON order_table.order_customer_id = customer_table.customer_id\n" +
+                            "INNER JOIN nmr.booking_table ON order_table.order_booking_id = booking_table.booking_id\n" +
+                            "INNER JOIN nmr.motorhome_table ON order_table.order_motorhome_id = motorhome_table.motorhome_id\n" +
+                            "INNER JOIN nmr.info_table ON order_table.order_info_id = info_table.info_id\n" +
+                            "INNER JOIN nmr.extras_table ON order_table.order_extras_id = extras_table.extras_id\n" +
+                            "INNER JOIN nmr.pickup_table ON order_table.order_pickup_id = pickup_table.pickup_id\n" +
+                            "INNER JOIN nmr.dropoff_table ON order_table.order_dropoff_id = dropoff_table.dropoff_id";
+
             PreparedStatement myStatement = conn.prepareStatement(getAllBookings);
             ResultSet rs = myStatement.executeQuery();
             while (rs.next()) {
@@ -114,14 +124,18 @@ public class BookingRepository implements IBookingRepository {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getString(8),
-                        rs.getString(9)));
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return allBookings;
     }
-    */
+
 
     @Override
     public Booking readOneBooking(int id) {
