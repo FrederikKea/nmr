@@ -139,9 +139,9 @@ public class CustomerRepository implements ICustomerRepository {
     public void updateCustomer(Customer c) {
         try {
             String query = "UPDATE nmr.customer_table " +
-                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
-                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
-                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id " +
+                    "INNER JOIN nmr.address_table ON customer_table.customer_address_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_email = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_phonenumber_id = phonenumber_table.phonenumber_id " +
                     "SET customer_first_name=?, customer_last_name=?, address_table.address_streetname=?" +
                     ",address_table.address_city=?, address_table.address_zipcode=?," +
                     "address_table.address_country=?,email_table.email=?,phonenumber_table.phonenumber=?,customer_dob=?" +
