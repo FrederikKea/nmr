@@ -152,24 +152,4 @@ public class Booking {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "order_id=" + order_id +
-                ", customers='" + customers + '\'' +
-                ", motorhome='" + motorhome + '\'' +
-                ", rentalStartTime='" + rentalStartTime + '\'' +
-                ", rentalStopTime='" + rentalStopTime + '\'' +
-                ", pickupStreetname='" + pickupStreetname + '\'' +
-                ", pickupCity='" + pickupCity + '\'' +
-                ", pickupZipcode='" + pickupZipcode + '\'' +
-                ", dropoffStreetname='" + dropoffStreetname + '\'' +
-                ", dropoffCity='" + dropoffCity + '\'' +
-                ", dropoffZipcode='" + dropoffZipcode + '\'' +
-                ", extras='" + extras + '\'' +
-                ", comment='" + comment + '\'' +
-                '}';
-    }
 }

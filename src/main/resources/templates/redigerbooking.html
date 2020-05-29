@@ -16,7 +16,16 @@
 
         <tr>
             <td><label for="motorhome">Motorhome</label></td>
-            <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>
+            <!-- <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>-->
+            <td>
+                <select name="motorhome" id="motorhome">
+                    <option th:field="*{motorhome}"
+                            th:each="motorhome : ${motorhomes}"
+                            th:text="${motorhome.modelName}"
+                            th:value="${motorhome.modelName}">
+                    </option>
+                </select>
+            </td>
             <td th:if="${#fields.hasErrors('motorhome')}" th:errors="*{motorhome}">Name Error</td>
         </tr>
         <tr>
@@ -60,10 +69,19 @@
             <td><input type="number" th:field="*{dropoffZipcode}" class="form-control" id="dropoffZipcode" placeholder="Postnummer"></td>
             <td th:if="${#fields.hasErrors('dropoffZipcode')}" th:errors="*{dropoffZipcode}">Zipcode Error</td>
         </tr>
-
         <tr>
             <td><label for="extras">Ekstra</label></td>
-            <td><input type="extras" th:field="*{extras}" class="form-control" id="extras" placeholder="Ekstra" ></td>
+            <!-- <td><input type="extras" th:field="*{extras}" class="form-control" id="extras" placeholder="Ekstra" ></td> -->
+            <td>
+                <select name="extras" id="extras">
+                    <option th:field="*{extras}"
+                            th:each="extra : ${extras}"
+                            th:text="${extra.description}"
+                            th:value="${extra.description}">
+
+                    </option>
+                </select>
+            </td>
             <td th:if="${#fields.hasErrors('extras')}" th:errors="*{extras}">Date of Birth Error</td>
         </tr>
         <tr>
@@ -77,5 +95,10 @@
         <tr>
     </table>
 </form>
+
+
+
+
+
 </body>
 </html>

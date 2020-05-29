@@ -54,7 +54,7 @@ public class BookingRepository implements IBookingRepository {
             String queryOrderTable = "INSERT INTO nmr.order_table(order_customer_id, order_extras_id, order_info_id, order_booking_id,order_pickup_id, order_dropoff_id,order_motorhome_id)" +
                     "VALUES((SELECT customer_id FROM nmr.customer_table WHERE customer_first_name = ?)," +
                     "(SELECT extras_id FROM nmr.extras_table WHERE extras_description = ?)," +
-                    "(SELECT info_id FROM nmr.info_table WHERE info_comment = ?)," +
+                    "(IF NOT EXISTS (SELECT info_id FROM nmr.info_table WHERE info_comment = ?)," +
                     "(SELECT booking_id FROM nmr.booking_table WHERE booking_rentalstarttime = ?)," +
                     "(SELECT pickup_id FROM nmr.pickup_table WHERE pickup_streetname = ?)," +
                     "(SELECT dropoff_id FROM nmr.dropoff_table WHERE dropoff_streetname = ?)," +

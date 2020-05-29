@@ -38,8 +38,6 @@ public class BookingController {
     @PostMapping("/addBooking")
     public String createBooking (@ModelAttribute Booking booking) {
         bs.createBooking(booking);
-
-        //return "redirect:/booking";
         return  "redirect:/opretbooking";
     }
 
@@ -48,6 +46,8 @@ public class BookingController {
     public String showUpdateForm(@PathVariable("id") int id, Model model){
         Booking booking = bs.readOneBooking(id);
         model.addAttribute("booking", booking);
+        model.addAttribute("motorhomes", ms.readAllMotorhomes());
+        model.addAttribute("extras", er.readAllExtras());
         return "redigerbooking";
     }
 
