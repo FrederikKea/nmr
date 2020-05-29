@@ -1,33 +1,37 @@
 package com.nmr.demo.Model;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class Booking {
     private int order_id;
-    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg en kunde")
+    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg en kunde")
     private String customers;
-    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et motorhome")
+    @NotBlank (message="vælg et motorhome")
     private String motorhome;
-    //skal vi have den ind i vores db eller hardcode valgmulighederne til denne?
-    //private String season;
     @DateTimeFormat(pattern = "yyyy-MM-dd")// needed for input field on html pages (in order to serve the right format)
     private String rentalStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")// needed for input field on html pages (in order to serve the right format)
     private String rentalStopTime;
-    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et gadenavn mellem 2-255 bogstaver")
+    @Pattern(regexp="^[ é'ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et gadenavn mellem 2-255 bogstaver")
     private String pickupStreetname;
     @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg et bynavn mellem 2-255 bogstaver")
     private String pickupCity;
     //danish zip codes only
-    @Range(min=1000, max=9999, message="vælg et gyldigt postnummer" )
+    @Range(min=1000, max=9999, message="vælg et gyldigt dansk postnummer" )
     private String pickupZipcode;
+    @Pattern(regexp="^[ é'ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et gadenavn mellem 2-255 bogstaver")
     private String dropoffStreetname;
+    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg et bynavn mellem 2-255 bogstaver")
     private String dropoffCity;
+    @Range(min=1000, max=9999, message="vælg et gyldigt dansk postnummer" )
     private String dropoffZipcode;
     private String extras;
+    @Length(min=0, max=255)
     private String comment;
 
     public Booking(int order_id, String customers, String motorhome, String rentalStartTime, String rentalStopTime, String pickupStreetname, String pickupCity, String pickupZipcode, String dropoffStreetname, String dropoffCity, String dropoffZipcode, String extras, String comment) {

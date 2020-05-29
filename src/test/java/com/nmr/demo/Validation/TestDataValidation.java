@@ -1,5 +1,6 @@
 package com.nmr.demo.Validation;
 
+import com.nmr.demo.Model.Booking;
 import com.nmr.demo.Model.Customer;
 import com.nmr.demo.Validation.Customer.EmailValidationTest;
 import org.junit.After;
@@ -21,25 +22,19 @@ public class TestDataValidation {
 
     private static Validator validator;
     private static ValidatorFactory validatorFactory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailValidationTest.class);
-    private Customer testcustomer = new Customer(
-            0,                     // customer_id
-            "jack",                  // firstName
-            "daniels",                  // lastName
-            "jack street",              // addressStreetname
-            "new jack city",            // addressCity
-            8000,                    // addressZipcode
-            "country jack",             // addressCountry;
-            "jack@jackson.com",         // email;
-            "90909099",                 // phonenumber;
-            "2000-12-12",                   // dob;
-            "88888888"              // driverslicense;
-    );
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestDataValidation.class);
+    private Customer testcustomer;
+    private Booking testbooking;
+    Set<ConstraintViolation<Customer>> Customerviolations;
+    Set<ConstraintViolation<Booking>> Bookingviolations;
 
     @Before
     public void createValidator() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
+        TestData t = new TestData();
+        testcustomer = t.getTestCustomer();
+        testbooking = t.getTestBooking();
     }
 
     @After
@@ -49,8 +44,14 @@ public class TestDataValidation {
 
     @Test
     public void isCustomerValid(){
-        Set<ConstraintViolation<Customer>> violations = validator.validate(testcustomer);
-        assertTrue(violations.isEmpty());
+        Customerviolations = validator.validate(testcustomer);
+        assertTrue(Customerviolations.isEmpty());
+    }
+
+    @Test
+    public void isBookingValid(){
+        Bookingviolations = validator.validate(testbooking);
+        assertTrue(Bookingviolations.isEmpty());
     }
 
 }

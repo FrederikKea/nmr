@@ -1,6 +1,6 @@
-package com.nmr.demo.Validation.Customer;
+package com.nmr.demo.Validation.Booking;
 
-import com.nmr.demo.Model.Customer;
+import com.nmr.demo.Model.Booking;
 import com.nmr.demo.Validation.TestData;
 import org.junit.After;
 import org.junit.Before;
@@ -17,20 +17,20 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class NameValidationTest {
+public class AddressCityValidationTest {
 
     private static Validator validator;
     private static ValidatorFactory validatorFactory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(NameValidationTest.class);
-    private Customer testcustomer;
-    Set<ConstraintViolation<Customer>> violations;
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddressCityValidationTest.class);
+    private Booking testbooking;
+    Set<ConstraintViolation<Booking>> violations;
 
     @Before
     public void createValidator() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
         TestData t = new TestData();
-        testcustomer = t.getTestCustomer();
+        testbooking = t.getTestBooking();
     }
 
     @After
@@ -41,19 +41,21 @@ public class NameValidationTest {
     @Test
     public void BlankTest(){
         //test with blank (Null is being taken care of by framework)
-        testcustomer.setFirstName("");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setPickupCity("");
+        testbooking.setDropoffCity("");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertFalse(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
 
     @Test
-    public void DigitsInNameTest(){
+    public void DigitsInCityNameTest(){
         //test with digits in name
-        testcustomer.setFirstName("jackson1");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setPickupCity("Brocity 6");
+        testbooking.setDropoffCity("Brocity 6");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertFalse(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -61,9 +63,10 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest1(){
         //test with special letter
-        testcustomer.setFirstName("Åge");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setPickupCity("Århus");
+        testbooking.setDropoffCity("Århus");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -71,9 +74,10 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest2(){
         //test with special letter
-        testcustomer.setFirstName("Børge");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setPickupCity("Brønderslev");
+        testbooking.setDropoffCity("Brønderslev");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -81,11 +85,11 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest3(){
         //test with special letter
-        testcustomer.setFirstName("Ærik");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setPickupCity("Brænderup");
+        testbooking.setDropoffCity("Brænderup");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
-
 }

@@ -1,5 +1,6 @@
 package com.nmr.demo.Validation;
 
+import com.nmr.demo.Model.Booking;
 import com.nmr.demo.Model.Customer;
 
 public class TestData {
@@ -20,5 +21,22 @@ public class TestData {
         );
     }
 
+    public Booking getTestBooking(){
+        return new Booking(
+            0,                                    //order_id;
+            "Bent",                              //customers;
+            "Pössl 2Win PLUS",                  //motorhome;
+            "2050-12-12",                     //rentalStartTime
+            "2051-12-12",                     //rentalStopTime
+            "Citronvej 231",                //pickupStreetname
+            "Holeby",                            //pickupCity;
+            "4960",                           //pickupZipcode
+            "Citronvej 231",               //dropoffStreetname
+            "Holeby",                           //dropoffCity
+            "4960",                          //dropoffZipcode
+            "",                                     //extras
+            ""                                    //comment
+        );
+    }
 
 }

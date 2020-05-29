@@ -1,6 +1,6 @@
-package com.nmr.demo.Validation.Customer;
+package com.nmr.demo.Validation.Booking;
 
-import com.nmr.demo.Model.Customer;
+import com.nmr.demo.Model.Booking;
 import com.nmr.demo.Validation.TestData;
 import org.junit.After;
 import org.junit.Before;
@@ -22,15 +22,15 @@ public class NameValidationTest {
     private static Validator validator;
     private static ValidatorFactory validatorFactory;
     private static final Logger LOGGER = LoggerFactory.getLogger(NameValidationTest.class);
-    private Customer testcustomer;
-    Set<ConstraintViolation<Customer>> violations;
+    private Booking testbooking;
+    Set<ConstraintViolation<Booking>> violations;
 
     @Before
     public void createValidator() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
         TestData t = new TestData();
-        testcustomer = t.getTestCustomer();
+        testbooking = t.getTestBooking();
     }
 
     @After
@@ -41,9 +41,9 @@ public class NameValidationTest {
     @Test
     public void BlankTest(){
         //test with blank (Null is being taken care of by framework)
-        testcustomer.setFirstName("");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setCustomers("");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertFalse(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -51,9 +51,9 @@ public class NameValidationTest {
     @Test
     public void DigitsInNameTest(){
         //test with digits in name
-        testcustomer.setFirstName("jackson1");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setCustomers("jackson1");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertFalse(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -61,9 +61,9 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest1(){
         //test with special letter
-        testcustomer.setFirstName("Åge");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setCustomers("Åge");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -71,9 +71,9 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest2(){
         //test with special letter
-        testcustomer.setFirstName("Børge");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setCustomers("Børge");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
@@ -81,9 +81,9 @@ public class NameValidationTest {
     @Test
     public void DanishLetterTest3(){
         //test with special letter
-        testcustomer.setFirstName("Ærik");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
+        testbooking.setCustomers("Ærik");
+        violations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }

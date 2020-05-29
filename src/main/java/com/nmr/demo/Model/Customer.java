@@ -14,11 +14,11 @@ public class Customer {
     private String firstName;
     @Pattern(regexp="^[ÆØÅæøåa-zA-Z]{2,255}",message="vælg et navn mellem 2-255 bogstaver")
     private String lastName;
-    @Pattern(regexp="^[ ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et gadenavn mellem 2-255 bogstaver")
+    @Pattern(regexp="^[ é'ÆØÅæøåa-zA-Z0-9]{2,255}",message="vælg et gadenavn mellem 2-255 bogstaver")
     private String addressStreetname;
     @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg et bynavn mellem 2-255 bogstaver")
     private String addressCity;
-    @Range(min=1, max=2147483647, message="vælg et gyldigt postnummer" )
+    @Range(min=1, max=2147483646, message="vælg et gyldigt postnummer" )
     private int addressZipcode;
     @Pattern(regexp="^[ ÆØÅæøåa-zA-Z]{2,255}",message="vælg et landenavn mellem 2-255 bogstaver")
     private String addressCountry;

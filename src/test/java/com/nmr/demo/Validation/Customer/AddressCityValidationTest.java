@@ -21,7 +21,7 @@ public class AddressCityValidationTest {
 
     private static Validator validator;
     private static ValidatorFactory validatorFactory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailValidationTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AddressCityValidationTest.class);
     private Customer testcustomer;
     Set<ConstraintViolation<Customer>> violations;
 
@@ -60,6 +60,7 @@ public class AddressCityValidationTest {
 
     @Test
     public void DanishLetterTest1(){
+        //test with special letter
         testcustomer.setAddressCity("Århus");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
@@ -69,6 +70,7 @@ public class AddressCityValidationTest {
 
     @Test
     public void DanishLetterTest2(){
+        //test with special letter
         testcustomer.setAddressCity("Brønderslev");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
@@ -78,6 +80,7 @@ public class AddressCityValidationTest {
 
     @Test
     public void DanishLetterTest3(){
+        //test with special letter
         testcustomer.setAddressCity("Brænderup");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());

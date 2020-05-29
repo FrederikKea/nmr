@@ -30,12 +30,12 @@
         </tr>
         <tr>
             <td><label for="rentalStartTime">Startdato</label></td>
-            <td><input type="text" th:field="*{rentalStartTime}" class="form-control" id="rentalStartTime" placeholder="Startdato"></td>
+            <td><input type="date" th:field="*{rentalStartTime}" class="form-control" id="rentalStartTime" placeholder="Startdato" required oninvalid="this.setCustomValidity('Indtast en gyldig startdato')" oninput="setCustomValidity('')"></td>
             <td th:if="${#fields.hasErrors('rentalStartTime')}" th:errors="*{rentalStartTime}">Streetname Error</td>
         </tr>
         <tr>
             <td><label for="rentalStopTime">Slutdato</label></td>
-            <td><input type="text" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato"></td>
+            <td><input type="date" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato"required oninvalid="this.setCustomValidity('Indtast en gyldig slutdato')" oninput="setCustomValidity('')"></td>
             <td th:if="${#fields.hasErrors('rentalStopTime')}" th:errors="*{rentalStopTime}">Cityname Error</td>
         </tr>
         <tr>
