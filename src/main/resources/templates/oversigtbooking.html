@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Oversigt over bookings</title>
+<head th:replace="navMenu :: head">
+<meta charset="UTF-8">
+<title>Oversigt booking</title>
 </head>
+
 <body>
+<div th:insert="navMenu.html :: header"></div>
+<div class="container-fluid">
+
 <h1>Oversigt over bookings</h1>
 <table>
     <tr>
@@ -38,7 +42,7 @@
         <td><a th:href="@{/editBooking/{id}(id=${booking.order_id})}"><button>Rediger</button></a></td>
         <td><a th:href="@{/deleteCustomer/{id}(id=${booking.order_id})}"><button>Delete</button></a></td>
     </tr>
-
 </table>
+</div>
 </body>
 </html>

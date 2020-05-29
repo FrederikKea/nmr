@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="navMenu :: head"></head>
     <meta charset="UTF-8">
     <title>Opret Kunde</title>
 </head>
 <body>
+<div th:insert="navMenu.html :: header"></div>
+<div class="container-fluid">
 <h1>Opret kunde</h1>
 
 <form action="#" th:action="@{/addCustomer}" th:object="${customer}" method="post">
@@ -181,5 +183,7 @@
 <!--        <tr>-->
 <!--    </table>-->
 <!--</form>-->
+
+</div>
 </body>
 </html>

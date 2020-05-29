@@ -1,96 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-
-    <title>Home</title>
+<head th:replace="navMenu :: head"></head>
+<meta charset="UTF-8">
+<title>Forside</title>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <a class="navbar-brand" href="#">Nordic Motorhome</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <!--Dropdown menu for Bestillinger -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBestillinger" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Bestillinger
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="test">Oversigt over bestillinger</a>
-                        <a class="dropdown-item" href="#">Opret bestilling</a>
-                        <a class="dropdown-item" href="#">Rediger bestillinger</a>
-                        <a class="dropdown-item" href="#">Slet bestillinger</a>
+<div th:insert="navMenu.html :: header"></div>
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <!--Dropdown menu for Kunder -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownKunder" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Kunder
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="oversigtkunde">Oversigt over kunder</a>
-                        <a class="dropdown-item" href="opretkunde">Opret kunde</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <!--Dropdown menu for Medarbjeder-->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMedarbjeder" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Medarbejder
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Liste over medarbejdere</a>
-                        <a class="dropdown-item" href="#">Opret medarbejder</a>
-                        <a class="dropdown-item" href="#">Rediger medarbejder</a>
-                        <a class="dropdown-item" href="#">Slet medarbejder</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <!--Dropdown menu for Motorhome -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMotorhome" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">Motorhome
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="oversigtmotorhome">Liste over motorhomes</a>
-                        <a class="dropdown-item" href="#">Opret motorhome</a>
-                        <a class="dropdown-item" href="#">Rediger motorhome</a>
-                        <a class="dropdown-item" href="#">Slet motorhome</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+<div class="container-fluid">
 
-
-
-            </ul>
-            <!--Log ud -->
-            <li class="nav-item form-inline my-2 my-lg-0 navbar-right">
-                <a class="nav-link " href="#">Log ud</a>
-            </li>
-            <!-- Logo image -->
-            <a class="navbar-brand navbar-right" href="#">
-                <img src="img/MotorhomeLogo.png" width="50" height="50" alt="">
-            </a>
-                <!-- http://i.imgur.com/qK42fUu.jpg -->
-        </div>
-    </nav>
-
-    <h1 class="text-center">Opret bestillinger</h1>
+    <h1 class="text-left">Opret bestillinger</h1>
     <img src="img/MotorhomeIcon.jpg">
 
 
@@ -116,63 +36,19 @@
 
     <br>
 
-    <br>
-    <br>
-
-    <br>
-    <br>
-    <br>
-    <p>Hey het
-        gege
-        gesegesgesgegegs
-        gesgesg</p>
-
-    <br>
-
-    <br>
-    <br>
-
-    <br>
-    <br>
-    <br>
-    <p>Hey het
-        gege
-        gesegesgesgegegs
-        gesgesg</p>
-
-    <br>
-
-    <br>
-    <br>
-
-    <br>
-    <br>
-    <br>
-    <p>Hey het
-        gege
-        gesegesgesgegegs
-        gesgesg</p>
-
-    <br>
-
-    <br>
-    <br>
-
-    <br>
-    <br>
-    <br>
 
 
 </div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+-->
 </body>
 </html>
