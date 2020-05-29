@@ -20,13 +20,13 @@ public class BookingRepository implements IBookingRepository {
     public void createBooking(Booking booking) {
         try {
 
-            String queryInfoTable = "INSERT INTO nmr.info_table (info_comment) " +
+            String queryInfoTable = "INSERT IGNORE INTO nmr.info_table (info_comment) " +
                     "VALUES (?)";
             preparedStatement = conn.prepareStatement(queryInfoTable);
             preparedStatement.setString(1,booking.getComment());
             preparedStatement.executeUpdate();
 
-            String queryPickup_table = "INSERT INTO nmr.pickup_table (pickup_streetname, pickup_city, pickup_zipcode)" +
+            String queryPickup_table = "INSERT IGNORE INTO nmr.pickup_table (pickup_streetname, pickup_city, pickup_zipcode)" +
                     "VALUES (?,?,?)";
             preparedStatement = conn.prepareStatement(queryPickup_table);
             preparedStatement.setString(1,booking.getPickupStreetname());
@@ -35,7 +35,7 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement.executeUpdate();
 
 
-            String queryDropoff_table = "INSERT INTO nmr.dropoff_table (dropoff_streetname, dropoff_city, dropoff_zipcode)" +
+            String queryDropoff_table = "INSERT IGNORE INTO nmr.dropoff_table (dropoff_streetname, dropoff_city, dropoff_zipcode)" +
                     "VALUES (?,?,?)";
             preparedStatement = conn.prepareStatement(queryDropoff_table);
             preparedStatement.setString(1,booking.getDropoffStreetname());
@@ -44,18 +44,18 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement.executeUpdate();
 
 
-            String queryBookingTable = "INSERT INTO nmr.booking_table (booking_rentalstarttime,booking_rentalstoptime)" +
+            String queryBookingTable = "INSERT IGNORE INTO nmr.booking_table (booking_rentalstarttime,booking_rentalstoptime)" +
                     "VALUES (?,?)";
             preparedStatement = conn.prepareStatement(queryBookingTable);
             preparedStatement.setDate(1,java.sql.Date.valueOf(booking.getRentalStartTime()));
-            preparedStatement.setDate(2,java.sql.Date.valueOf("1995-06-23"));
+            preparedStatement.setDate(2,java.sql.Date.valueOf(booking.getRentalStopTime()));
             preparedStatement.executeUpdate();
 
             String queryOrderTable = "INSERT INTO nmr.order_table(order_customer_id, order_extras_id, order_info_id, order_booking_id,order_pickup_id, order_dropoff_id,order_motorhome_id)" +
                     "VALUES((SELECT customer_id FROM nmr.customer_table WHERE customer_first_name = ?)," +
                     "(SELECT extras_id FROM nmr.extras_table WHERE extras_description = ?)," +
-                    "(IF NOT EXISTS (SELECT info_id FROM nmr.info_table WHERE info_comment = ?)," +
-                    "(SELECT booking_id FROM nmr.booking_table WHERE booking_rentalstarttime = ?)," +
+                    "(SELECT info_id FROM nmr.info_table WHERE info_comment = ?)," +
+                    "(SELECT booking_id FROM nmr.booking_table WHERE booking_rentalstarttime = ? AND booking_rentalstoptime =?)," +
                     "(SELECT pickup_id FROM nmr.pickup_table WHERE pickup_streetname = ?)," +
                     "(SELECT dropoff_id FROM nmr.dropoff_table WHERE dropoff_streetname = ?)," +
                     "(SELECT motorhome_id FROM nmr.motorhome_table WHERE motorhome_modelname = ?))";
@@ -64,9 +64,10 @@ public class BookingRepository implements IBookingRepository {
             preparedStatement.setString(2, booking.getExtras());
             preparedStatement.setString(3, booking.getComment());
             preparedStatement.setDate(4, java.sql.Date.valueOf(booking.getRentalStartTime()));
-            preparedStatement.setString(5,booking.getPickupStreetname());
-            preparedStatement.setString(6,booking.getDropoffStreetname());
-            preparedStatement.setString(7,booking.getMotorhome());
+            preparedStatement.setDate(5,java.sql.Date.valueOf(booking.getRentalStopTime()));
+            preparedStatement.setString(6,booking.getPickupStreetname());
+            preparedStatement.setString(7,booking.getDropoffStreetname());
+            preparedStatement.setString(8,booking.getMotorhome());
             preparedStatement.executeUpdate();
 
 

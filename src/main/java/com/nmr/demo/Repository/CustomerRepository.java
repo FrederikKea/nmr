@@ -20,7 +20,7 @@ public class CustomerRepository implements ICustomerRepository {
     public void createCustomer(Customer customer) {
         try {
 
-            String query1 = "INSERT INTO nmr.address_table(address_streetname, address_city, address_zipcode, address_country)" + "VALUES(?,?,?,?);";
+            String query1 = "INSERT IGNORE INTO nmr.address_table(address_streetname, address_city, address_zipcode, address_country)" + "VALUES(?,?,?,?);";
             preparedStatement = conn.prepareStatement(query1);
             preparedStatement.setString(1, customer.getAddressStreetname());
             preparedStatement.setString(2, customer.getAddressCity());
@@ -29,14 +29,14 @@ public class CustomerRepository implements ICustomerRepository {
 
             preparedStatement.executeUpdate();
 
-            String queryEmailTable = "INSERT INTO nmr.email_table (email)" +
+            String queryEmailTable = "INSERT IGNORE INTO nmr.email_table (email)" +
                     "VALUES (?)";
             preparedStatement = conn.prepareStatement(queryEmailTable);
             preparedStatement.setString(1, customer.getEmail());
 
             preparedStatement.executeUpdate();
 
-            String quertphonenumberTable = "INSERT INTO nmr.phonenumber_table (phonenumber)" +
+            String quertphonenumberTable = "INSERT IGNORE INTO nmr.phonenumber_table (phonenumber)" +
                     "VALUES (?)";
             preparedStatement = conn.prepareStatement(quertphonenumberTable);
             preparedStatement.setString(1, customer.getPhonenumber());
