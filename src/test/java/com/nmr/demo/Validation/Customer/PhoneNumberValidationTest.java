@@ -14,13 +14,14 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class EmailValidationTest {
+public class PhoneNumberValidationTest {
 
     private static Validator validator;
     private static ValidatorFactory validatorFactory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailValidationTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PhoneNumberValidationTest.class);
     private Customer testcustomer;
     Set<ConstraintViolation<Customer>> violations;
 
@@ -39,8 +40,8 @@ public class EmailValidationTest {
 
     @Test
     public void BlankTest(){
-        //test with blank
-        testcustomer.setEmail("");
+        //test with blank (Null is being taken care of by framework)
+        testcustomer.setPhonenumber("");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertFalse(violations.isEmpty());
@@ -48,9 +49,9 @@ public class EmailValidationTest {
     }
 
     @Test
-    public void JustFirstNameTest(){
-        //test with just a name
-        testcustomer.setEmail("jackson");
+    public void LettersInZipcode(){
+        //test with normal letters
+        testcustomer.setPhonenumber("bbbbbbb999");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertFalse(violations.isEmpty());
@@ -58,9 +59,9 @@ public class EmailValidationTest {
     }
 
     @Test
-    public void JustLastNameTest(){
-        //test with just last name
-        testcustomer.setEmail("gmail.com");
+    public void LowerBoundryInZipcode(){
+        //test with 5 numbers
+        testcustomer.setPhonenumber("54801");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertFalse(violations.isEmpty());
@@ -68,29 +69,9 @@ public class EmailValidationTest {
     }
 
     @Test
-    public void NoDomainTest(){
-        //test with no domain at the end
-        testcustomer.setEmail("jackson@gmail");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
-        assertFalse(violations.isEmpty());
-        LOGGER.info(violations.toString());
-    }
-
-    @Test
-    public void NoAtTest(){
-        //test with no @ and blank space
-        testcustomer.setEmail("jackson gmail");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
-        assertFalse(violations.isEmpty());
-        LOGGER.info(violations.toString());
-    }
-
-    @Test
-    public void UnderscoreTest(){
-        //test with underscore
-        testcustomer.setEmail("jackson_pollock@gmail_bro.com");
+    public void LowerNumbersInZipcode(){
+        //test with 6 numbers
+        testcustomer.setPhonenumber("548013");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertTrue(violations.isEmpty());
@@ -98,29 +79,19 @@ public class EmailValidationTest {
     }
 
     @Test
-    public void DanishLetterTest1(){
-        //no danish letters in email
-        testcustomer.setEmail("Åge@gmail.com");
+    public void UpperNumbersInZipcode(){
+        //test with 255 numbers
+        testcustomer.setPhonenumber("548013806029944318668395148882885576841166661161885936932589072630394365998765356315626207853420653757299623032170417567493634521922349679592672980854068540770789396641459482507746273663313819975017345082941621131284599572129914483918876491938954253297754");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
-        assertFalse(violations.isEmpty());
+        assertTrue(violations.isEmpty());
         LOGGER.info(violations.toString());
     }
 
     @Test
-    public void DanishLetterTest2(){
-        //no danish letters in email
-        testcustomer.setEmail("smørrebrød@gmail.com");
-        violations = validator.validate(testcustomer);
-        LOGGER.info(testcustomer.toString());
-        assertFalse(violations.isEmpty());
-        LOGGER.info(violations.toString());
-    }
-
-    @Test
-    public void DanishLetterTest3(){
-        //no danish letters in email
-        testcustomer.setEmail("Æriks@gmail.com");
+    public void UpperBoundryInZipcode(){
+        //test with 256 numbers
+        testcustomer.setPhonenumber("5498013806029944318668395148882885576841166661161885936932589072630394365998765356315626207853420653757299623032170417567493634521922349679592672980854068540770789396641459482507746273663313819975017345082941621131284599572129914483918876491938954253297754");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertFalse(violations.isEmpty());

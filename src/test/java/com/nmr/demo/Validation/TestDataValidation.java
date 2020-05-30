@@ -45,13 +45,17 @@ public class TestDataValidation {
     @Test
     public void isCustomerValid(){
         Customerviolations = validator.validate(testcustomer);
+        LOGGER.info(testcustomer.toString());
         assertTrue(Customerviolations.isEmpty());
+        LOGGER.info(Customerviolations.toString());
     }
 
     @Test
     public void isBookingValid(){
         Bookingviolations = validator.validate(testbooking);
+        LOGGER.info(testbooking.toString());
         assertTrue(Bookingviolations.isEmpty());
+        LOGGER.info(Bookingviolations.toString());
     }
 
 }

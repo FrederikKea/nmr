@@ -63,8 +63,8 @@ public class ZipcodeValidationTest {
     @Test
     public void WithinBoundryTest(){
         //test with acceptable number even though our testdata is acceptable
-        testbooking.setPickupZipcode("8000");
-        testbooking.setDropoffZipcode("8000");
+        testbooking.setPickupZipcode("9999");
+        testbooking.setDropoffZipcode("9999");
         violations = validator.validate(testbooking);
         LOGGER.info(testbooking.toString());
         assertTrue(violations.isEmpty());

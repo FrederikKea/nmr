@@ -49,6 +49,16 @@ public class NameValidationTest {
     }
 
     @Test
+    public void SpaceInNameTest(){
+        //test with space in name
+        testcustomer.setFirstName("jack son");
+        violations = validator.validate(testcustomer);
+        LOGGER.info(testcustomer.toString());
+        assertFalse(violations.isEmpty());
+        LOGGER.info(violations.toString());
+    }
+
+    @Test
     public void DigitsInNameTest(){
         //test with digits in name
         testcustomer.setFirstName("jackson1");

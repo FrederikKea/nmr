@@ -50,8 +50,28 @@ public class DriversLicenseValidationTest {
 
     @Test
     public void LettersInZipcode(){
-        //test with 256 chars
-        testcustomer.setDriverslicense("OMRUYrwEqmCqBUryR4e4AcReKEf3b2NUCbiwEtyRoYPsxcyH6RdgYyGZIW00BY9UcXtuc8IzBn5q7n5bcd31V4iPNuSMfPXKQHdL1ndD74rD6t34MIjqvNn3hnSsQqTgVRgba0RUwD08QRBqPm2lc4LWfEOr4ruVG9hSpCJNC9Pqr0Zq6tWnnaIlChQku8F8CtC4ialNMzpC8M9oRVe5v6lHLvehTIIMUt6ytYR1DDEnV31kMWipL1uT1zxStV5f");
+        //test with normal letters
+        testcustomer.setDriverslicense("bbbbbbb999");
+        violations = validator.validate(testcustomer);
+        LOGGER.info(testcustomer.toString());
+        assertFalse(violations.isEmpty());
+        LOGGER.info(violations.toString());
+    }
+
+    @Test
+    public void NumbersInZipcode(){
+        //test with 255 numbers
+        testcustomer.setDriverslicense("548013806029944318668395148882885576841166661161885936932589072630394365998765356315626207853420653757299623032170417567493634521922349679592672980854068540770789396641459482507746273663313819975017345082941621131284599572129914483918876491938954253297754");
+        violations = validator.validate(testcustomer);
+        LOGGER.info(testcustomer.toString());
+        assertTrue(violations.isEmpty());
+        LOGGER.info(violations.toString());
+    }
+
+    @Test
+    public void UpperBoundryInZipcode(){
+        //test with 256 numbers
+        testcustomer.setDriverslicense("5498013806029944318668395148882885576841166661161885936932589072630394365998765356315626207853420653757299623032170417567493634521922349679592672980854068540770789396641459482507746273663313819975017345082941621131284599572129914483918876491938954253297754");
         violations = validator.validate(testcustomer);
         LOGGER.info(testcustomer.toString());
         assertFalse(violations.isEmpty());
