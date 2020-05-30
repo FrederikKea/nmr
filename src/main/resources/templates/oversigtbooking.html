@@ -3,14 +3,16 @@
 <head th:replace="navMenu :: head">
 <meta charset="UTF-8">
 <title>Oversigt booking</title>
+
 </head>
 
 <body>
 <div th:insert="navMenu.html :: header"></div>
 <div class="container-fluid">
-
+<h2></h2>
 <h1>Oversigt over bookings</h1>
-<table>
+    <table class="table table-striped">
+
     <tr>
         <th>Customer</th>
         <th>Motorhome</th>
@@ -24,6 +26,9 @@
         <th>Dropoff zipcode</th>
         <th>Ekstra udstyr</th>
         <th>Kommentar</th>
+        <th></th>
+        <th></th>
+
     </tr>
 
     <tr th:each="booking : ${bookings}">
