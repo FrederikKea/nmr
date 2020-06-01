@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MotorhomeRepository {
+public class MotorhomeRepository implements IMotorhomeRepository {
 
     private Connection conn;
     private PreparedStatement preparedStatement;
