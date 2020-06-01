@@ -43,7 +43,7 @@ public class CustomerRepository implements ICustomerRepository {
 
             preparedStatement.executeUpdate();
 
-            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_id)"
+            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_number)"
                     + "VALUES((SELECT address_id FROM nmr.address_table WHERE address_streetname = ?)," +
                     "(SELECT email_id FROM nmr.email_table WHERE email = ?)," +
                     "(SELECT phonenumber_id FROM nmr.phonenumber_table WHERE phonenumber = ?)," +
@@ -105,15 +105,15 @@ public class CustomerRepository implements ICustomerRepository {
     public List<Customer> readAllCustomers() {
         List <Customer> allCustomers = new ArrayList<>();
         try {
-            String getAllCustomer = "SELECT customer_table.customer_id,customer_table.customer_first_name,customer_table.customer_last_name, " +
-                    "address_table.address_streetname, address_table.address_city, address_table.address_zipcode,address_table.address_country, " +
+            String getAllCustomer = "SELECT customer_table.customer_id, customer_table.customer_first_name, customer_table.customer_last_name, " +
+                    "address_table.address_streetname, address_table.address_city, address_table.address_zipcode, address_table.address_country, " +
                     "email_table.email, " +
                     "phonenumber_table.phonenumber, "+
-                    "customer_dob,customer_driverslicense_id " +
+                    "customer_dob, customer_driverslicense_number " +
                     "FROM nmr.customer_table "+
-                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
-                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
-                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id";
+                    "INNER JOIN nmr.address_table ON customer_table.customer_address_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_email_id = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_phonenumber_id = phonenumber_table.phonenumber_id";
             PreparedStatement myStatement = conn.prepareStatement(getAllCustomer);
             ResultSet rs = myStatement.executeQuery();
             while (rs.next()) {
