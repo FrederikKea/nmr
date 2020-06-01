@@ -153,18 +153,28 @@ public class BookingRepository implements IBookingRepository {
     public Booking readOneBooking(int order_id) {
         Booking bookingToReturn = new Booking();
         try{
-            String readOneBooking = "SELECT order_table.order_id, customer_table.customer_first_name, motorhome_table.motorhome_modelname, " +
-                    "booking_table.booking_rentalstarttime, booking_table.booking_rentalstoptime, pickup_table.pickup_streetname, " +
-                    "pickup_table.pickup_city, pickup_table.pickup_zipcode, dropoff_table.dropoff_streetname, " +
-                    "dropoff_table.dropoff_city, dropoff_table.dropoff_zipcode, extras_table.extras_description, info_table.info_comment " +
+            String readOneBooking =
+                    "SELECT order_table.order_id, " +
+                    "customer_table.customer_first_name, " +
+                    "motorhome_table.motorhome_modelname, " +
+                    "booking_table.booking_start_date, " +
+                    "booking_table.booking_stop_date, " +
+                    "a_t.address_streetname, " +
+                    "a_t.address_city, " +
+                    "a_t.address_zipcode, " +
+                    "a_t2.address_streetname, " +
+                    "a_t2.address_city, " +
+                    "a_t2.address_zipcode, " +
+                    "extras_table.extras_description, " +
+                    "info_table.info_description " +
                     "FROM nmr.order_table " +
                     "INNER JOIN nmr.customer_table ON order_table.order_customer_id = customer_table.customer_id " +
-                    "INNER JOIN nmr.motorhome_table ON order_table.order_motorhome_id = motorhome_table.motorhome_id " +
                     "INNER JOIN nmr.booking_table ON order_table.order_booking_id = booking_table.booking_id " +
-                    "INNER JOIN nmr.pickup_table ON order_table.order_pickup_id = pickup_table.pickup_id " +
-                    "INNER JOIN nmr.dropoff_table ON order_table.order_dropoff_id = dropoff_table.dropoff_id " +
-                    "INNER JOIN nmr.extras_table ON order_table.order_extras_id = extras_table.extras_id " +
+                    "INNER JOIN nmr.motorhome_table ON order_table.order_motorhome_id = motorhome_table.motorhome_id " +
                     "INNER JOIN nmr.info_table ON order_table.order_info_id = info_table.info_id " +
+                    "INNER JOIN nmr.extras_table ON order_table.order_extras_id = extras_table.extras_id " +
+                    "INNER JOIN nmr.address_table AS a_t ON order_table.order_pickup_id = a_t.address_id " +
+                    "INNER JOIN nmr.address_table AS a_t2 ON order_table.order_dropoff_id = a_t2.address_id " +
                     "WHERE order_id=?; ";
             /*
             *  PreparedStatement myStatement = conn.prepareStatement(getCustomer);
@@ -204,11 +214,11 @@ public class BookingRepository implements IBookingRepository {
                     "INNER JOIN nmr.customer_table ON order_table.order_customer_id = customer_table.customer_id " +
                     "INNER JOIN nmr.motorhome_table ON order_table.order_motorhome_id = motorhome_table.motorhome_id " +
                     "INNER JOIN nmr.booking_table ON order_table.order_booking_id = booking_table.booking_id " +
-                    "INNER JOIN nmr.pickup_table ON order_table.order_pickup_id = pickup_table.pickup_id " +
-                    "INNER JOIN nmr.dropoff_table ON order_table.order_dropoff_id = dropoff_table.dropoff_id " +
+                    "INNER JOIN nmr.address_table AS a_t ON order_table.order_pickup_id = a_t.address_id " +
+                    "INNER JOIN nmr.address_table AS a_t2 ON order_table.order_dropoff_id = a_t2.address_id " +
                     "INNER JOIN nmr.info_table ON order_table.order_info_id = info_table.info_id " +
                     "INNER JOIN nmr.extras_table ON order_table.order_extras_id = extras_table.extras_id " +
-                    "SET customer_table.customer_first_name=?, motorhome_table.motorhome_modelname =?, booking_table.booking_rentalstarttime=?, booking_table.booking_rentalstoptime=?, pickup_table.pickup_streetname=?, pickup_table.pickup_city=?, pickup_table.pickup_zipcode=?, dropoff_table.dropoff_streetname=?, dropoff_table.dropoff_city=?, dropoff_table.dropoff_zipcode=?, extras_table.extras_description=?, info_table.info_comment=? " +
+                    "SET customer_table.customer_first_name=?, motorhome_table.motorhome_modelname =?, booking_table.booking_start_date=?, booking_table.booking_stop_date=?, a_t.address_streetname=?, a_t.address_city=?, a_t.address_zipcode=?, a_t2.address_streetname=?, a_t2.address_city=?, a_t2.address_zipcode=?, extras_table.extras_description=?, info_table.info_description=? " +
                     "WHERE order_table.order_id=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, b.getCustomers());

@@ -44,18 +44,19 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.executeUpdate();
 
             String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_number)"
-                    + "VALUES((SELECT address_id FROM nmr.address_table WHERE address_streetname = ?)," +
+                    + "VALUES((SELECT address_id FROM nmr.address_table WHERE address_streetname = ? AND address_city = ?)," +
                     "(SELECT email_id FROM nmr.email_table WHERE email = ?)," +
                     "(SELECT phonenumber_id FROM nmr.phonenumber_table WHERE phonenumber = ?)," +
                     "?,?,?,?)";
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1,customer.getAddressStreetname());
-            preparedStatement.setString(2,customer.getEmail());
-            preparedStatement.setString(3, customer.getPhonenumber());
-            preparedStatement.setString(4, customer.getFirstName());
-            preparedStatement.setString(5, customer.getLastName());
-            preparedStatement.setDate(6,java.sql.Date.valueOf(customer.getDob()));
-            preparedStatement.setString(7, customer.getDriverslicense());
+            preparedStatement.setString(2,customer.getAddressCity());
+            preparedStatement.setString(3,customer.getEmail());
+            preparedStatement.setString(4, customer.getPhonenumber());
+            preparedStatement.setString(5, customer.getFirstName());
+            preparedStatement.setString(6, customer.getLastName());
+            preparedStatement.setDate(7,java.sql.Date.valueOf(customer.getDob()));
+            preparedStatement.setString(8, customer.getDriverslicense());
             preparedStatement.executeUpdate();
 
 
@@ -74,11 +75,11 @@ public class CustomerRepository implements ICustomerRepository {
                     "address_table.address_streetname, address_table.address_city, address_table.address_zipcode,address_table.address_country, " +
                     "email_table.email, " +
                     "phonenumber_table.phonenumber, "+
-                    "customer_dob,customer_driverslicense_id " +
+                    "customer_dob,customer_driverslicense_number " +
                     "FROM nmr.customer_table "+
-                    "INNER JOIN nmr.address_table ON customer_table.customer_id = address_table.address_id " +
-                    "INNER JOIN nmr.email_table ON customer_table.customer_id = email_table.email_id " +
-                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_id = phonenumber_table.phonenumber_id WHERE customer_id=? ";
+                    "INNER JOIN nmr.address_table ON customer_table.customer_address_id = address_table.address_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_email_id = email_table.email_id " +
+                    "INNER JOIN nmr.phonenumber_table ON customer_table.customer_phonenumber_id = phonenumber_table.phonenumber_id WHERE customer_id=? ";
             PreparedStatement myStatement = conn.prepareStatement(getCustomer);
             myStatement.setInt(1,customer_id);
             ResultSet rs = myStatement.executeQuery();
@@ -140,12 +141,12 @@ public class CustomerRepository implements ICustomerRepository {
         try {
             String query = "UPDATE nmr.customer_table " +
                     "INNER JOIN nmr.address_table ON customer_table.customer_address_id = address_table.address_id " +
-                    "INNER JOIN nmr.email_table ON customer_table.customer_email = email_table.email_id " +
+                    "INNER JOIN nmr.email_table ON customer_table.customer_email_id = email_table.email_id " +
                     "INNER JOIN nmr.phonenumber_table ON customer_table.customer_phonenumber_id = phonenumber_table.phonenumber_id " +
-                    "SET customer_first_name=?, customer_last_name=?, address_table.address_streetname=?" +
-                    ",address_table.address_city=?, address_table.address_zipcode=?," +
-                    "address_table.address_country=?,email_table.email=?,phonenumber_table.phonenumber=?,customer_dob=?" +
-                    ",customer_driverslicense_id=? WHERE customer_id=?";
+                    "SET customer_first_name=?, customer_last_name=?, address_table.address_streetname=?, " +
+                    "address_table.address_city=?, address_table.address_zipcode=?," +
+                    "address_table.address_country=?,email_table.email=?,phonenumber_table.phonenumber=?,customer_dob=?, " +
+                    "customer_driverslicense_number=? WHERE customer_id=?";
 
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1,c.getFirstName());
@@ -174,7 +175,7 @@ public class CustomerRepository implements ICustomerRepository {
         int email_ID;
         int phone_ID;
         try{
-            sql = "SELECT customer_address_id, customer_email, customer_phonenumber_id  FROM nmr.customer_table WHERE customer_id=?";
+            sql = "SELECT customer_address_id, customer_email_id, customer_phonenumber_id  FROM nmr.customer_table WHERE customer_id=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1,customer_Id);
             ResultSet rs = preparedStatement.executeQuery();
