@@ -16,6 +16,16 @@ public class BookingService {
         br.createBooking(booking);
     }
 
+    public String validateandcreateBooking(Booking booking, BindingResult binding, Model model){
+        if (binding.hasErrors()){
+            return "opretbooking";
+        }
+        br.createBooking(booking);
+        model.addAttribute("booking" , this.readAllBookings());
+        return ("redirect:/oversigtbooking");
+    }
+
+
     public void updateBooking(Booking b){
         br.updateBooking(b);
     }

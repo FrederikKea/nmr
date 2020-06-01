@@ -1,129 +1,104 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="navMenu :: head"></head>
+<head>
     <meta charset="UTF-8">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-          crossorigin="anonymous">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script>
-        $(function () {
-            $("#navReuse").load("nav.html");
-        })
-    </script>
-
-    <title>Booking</title>
+    <title>Opret Booking</title>
 </head>
-
-
 <body>
-<div th:insert="navMenu.html :: header"></div>
+<h1>Opret Booking</h1>
+<form action="#" th:action="@{/addBooking}" th:object="${booking}" method="post">
+    <table>
+        <tr>
+            <td><label for="customers">Fornavn</label></td>
+            <td><input type="text" th:field="*{customers}" class="form-control" id="customers" placeholder="Fornavn"></td>
+            <td th:if="${#fields.hasErrors('customers')}" th:errors="*{customers}">Name Error</td>
+        </tr>
+
+        <tr>
+            <td><label for="motorhome">Motorhome</label></td>
+            <!-- <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>-->
+            <td>
+                <select name="motorhome" id="motorhome">
+                    <option th:field="*{motorhome}"
+                            th:each="motorhome : ${motorhomes}"
+                            th:text="${motorhome.modelName}"
+                            th:value="${motorhome.modelName}">
+                    </option>
+                </select>
+            </td>
+            <td th:if="${#fields.hasErrors('motorhome')}" th:errors="*{motorhome}">Name Error</td>
+        </tr>
+        <tr>
+            <td><label for="rentalStartTime">Startdato</label></td>
+            <td><input type="date" th:field="*{rentalStartTime}" class="form-control" id="rentalStartTime" placeholder="Startdato" required oninvalid="this.setCustomValidity('Indtast en gyldig startdato')" oninput="setCustomValidity('')"></td>
+            <td th:if="${#fields.hasErrors('rentalStartTime')}" th:errors="*{rentalStartTime}">Streetname Error</td>
+        </tr>
+        <tr>
+            <td><label for="rentalStopTime">Slutdato</label></td>
+            <td><input type="date" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato" required oninvalid="this.setCustomValidity('Indtast en gyldig slutdato')" oninput="setCustomValidity('')"></td>
+            <td th:if="${#fields.hasErrors('rentalStopTime')}" th:errors="*{rentalStopTime}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupStreetname">Leveringsaddresse</label></td>
+            <td><input type="text" th:field="*{pickupStreetname}" class="form-control" id="pickupStreetname" placeholder="Leveringsaddresse"></td>
+            <td th:if="${#fields.hasErrors('pickupStreetname')}" th:errors="*{pickupStreetname}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupCity">By</label></td>
+            <td><input type="text" th:field="*{pickupCity}" class="form-control" id="pickupCity" placeholder="By"></td>
+            <td th:if="${#fields.hasErrors('pickupCity')}" th:errors="*{pickupCity}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="pickupZipcode">Postnummer</label></td>
+            <td><input type="number" th:field="*{pickupZipcode}" class="form-control" id="pickupZipcode" placeholder="Postnummer"></td>
+            <td th:if="${#fields.hasErrors('pickupZipcode')}" th:errors="*{pickupZipcode}">Zipcode Error</td>
+        </tr>
+        <tr>
+            <td><label for="dropoffStreetname">Afleveringsaddresse</label></td>
+            <td><input type="text" th:field="*{dropoffStreetname}" class="form-control" id="dropoffStreetname" placeholder="Afleveringsaddresse"></td>
+            <td th:if="${#fields.hasErrors('dropoffStreetname')}" th:errors="*{dropoffStreetname}">Cityname Error</td>
+        </tr>
+        <tr>
+            <td><label for="dropoffCity">By</label></td>
+            <td><input type="text" th:field="*{dropoffCity}" class="form-control" id="dropoffCity" placeholder="By"></td>
+            <td th:if="${#fields.hasErrors('dropoffCity')}" th:errors="*{dropoffCity}">Cityname Error</td>
+        </tr>
+        <!-- min="1" max="2147483647" required oninvalid="this.setCustomValidity('Indtast et gyldigt postnummer')" oninput="setCustomValidity('')"-->
+        <tr>
+            <td><label for="dropoffZipcode">Postnummer</label></td>
+            <td><input type="number" th:field="*{dropoffZipcode}" class="form-control" id="dropoffZipcode" placeholder="Postnummer"></td>
+            <td th:if="${#fields.hasErrors('dropoffZipcode')}" th:errors="*{dropoffZipcode}">Zipcode Error</td>
+        </tr>
+        <tr>
+            <td><label for="extras">Ekstra</label></td>
+            <!-- <td><input type="extras" th:field="*{extras}" class="form-control" id="extras" placeholder="Ekstra" ></td> -->
+            <td>
+                <select name="extras" id="extras">
+                    <option th:field="*{extras}"
+                            th:each="extra : ${extras}"
+                            th:text="${extra.description}"
+                            th:value="${extra.description}">
+
+                    </option>
+                </select>
+            </td>
+            <td th:if="${#fields.hasErrors('extras')}" th:errors="*{extras}">Date of Birth Error</td>
+        </tr>
+        <tr>
+            <td><label for="comment">Kommentar</label></td>
+            <td><input type="text" th:field="*{comment}" class="form-control" id="comment" placeholder="Kommentar"></td>
+            <td th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Driverslicense Error</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="submit" value="Opret booking"></td>
+        <tr>
+    </table>
+</form>
 
 
-<!--Navigation bar-->
-
-<div id="navReuse"></div>
 
 
-
-<!--end of Navigation bar-->
-
-
-<div class="container-fluid">
-
-    <h1>Opret Booking</h1>
-
-    <form action="/addBooking" method="post">
-
-        <label for="customers">Select a customer</label>
-        <!--<input type="text" name="customers" id="customerss"> -->
-
-        <select name="customers" id="customers">
-            <option value="default"> </option>
-            <option th:each="customer : ${customers}"
-                    th:text="${customer.firstName}"
-                    th:value="${customer.firstName}">
-
-            </option>
-        </select>
-
-        <br>
-        <label for="motorhome">motorhome</label>
-        <!-- <input type="text" name="motorhome" id="motorhome"> -->
-        <select name="motorhome" id="motorhome">
-            <option value="default"></option>
-            <option th:each="motorhome : ${motorhomes}"
-                    th:text="${motorhome.modelName}"
-                    th:value="${motorhome.modelName}">
-
-            </option>
-        </select>
-        <br>
-        <label for="rentalStartTime">rentalStartTime</label>
-        <input type="text" name="rentalStartTime" id="rentalStartTime">
-        <br>
-        <label for="rentalStopTime">rentalStopTime</label>
-        <input type="text" name="rentalStopTime" id="rentalStopTime">
-        <br>
-        <!--Pickup location -->
-        <label for="pickupStreetname">pickupStreetname</label>
-        <input type="text" name="pickupStreetname" id="pickupStreetname">
-        <br>
-        <label for="pickupCity">pickupCity</label>
-        <input type="text" name="pickupCity" id="pickupCity">
-        <br>
-        <label for="pickupZipcode">pickupZipcode</label>
-        <input type="text" name="pickupZipcode" id="pickupZipcode">
-        <br>
-
-        <label for="dropoffStreetname">dropoffStreetname</label>
-        <input type="text" name="dropoffStreetname" id="dropoffStreetname">
-        <br>
-        <label for="dropoffCity">dropoffCity</label>
-        <input type="text" name="dropoffCity" id="dropoffCity">
-        <br>
-        <label for="dropoffZipcode">dropoffZipcode</label>
-        <input type="text" name="dropoffZipcode" id="dropoffZipcode">
-        <br>
-
-        <label for="extras">extras</label>
-        <!-- <input type="text" name="extras" id="extras"> -->
-        <select name="extras" id="extras">
-            <option value="default"></option>
-            <option th:each="extra : ${extras}"
-                    th:text="${extra.description}"
-                    th:value="${extra.description}">
-
-            </option>
-        </select>
-        <br>
-        <label for="comment">comment</label>
-        <input type="text" name="comment" id="comment">
-        <br>
-
-        <input type="submit" name="submit">
-
-    </form>
-</div>
-
-
-
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-<!-- Fjernet scripts da de bliver indsat sammen med navMenu fragment
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
--->
 
 </body>
 </html>

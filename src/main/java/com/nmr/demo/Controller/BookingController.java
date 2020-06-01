@@ -26,9 +26,10 @@ public class BookingController {
     MotorhomeService ms = new MotorhomeService();
     ExtrasService er = new ExtrasService();
 
-    @GetMapping("/opretbooking")
+
+    @GetMapping("opretbooking")
     public String readAllModels(Model model) {
-        System.out.println("controllerlayer");
+        model.addAttribute("booking", new Booking());
         model.addAttribute("customers", cs.readAllCustomers());
         model.addAttribute("motorhomes", ms.readAllMotorhomes());
         model.addAttribute("extras", er.readAllExtras());
@@ -36,13 +37,12 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public String createBooking (@ModelAttribute Booking booking) {
-        bs.createBooking(booking);
-        return  "redirect:/opretbooking";
+    public String createBooking(@Valid @ModelAttribute Booking booking, BindingResult binding, Model model){
+        String validateandcreateB = bs.validateandcreateBooking(booking, binding, model);
+        return validateandcreateB;
     }
 
-
-    @GetMapping("/editBooking/{id}")
+        @GetMapping("/editBooking/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model){
         Booking booking = bs.readOneBooking(id);
         model.addAttribute("booking", booking);
