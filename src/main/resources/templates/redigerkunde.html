@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Rediger Kunde</title>
+<head th:replace="navMenu :: head"></head>
+<meta charset="UTF-8">
+<title>Rediger Kunde</title>
 </head>
 <body>
-<h1>Rediger Kunde</h1>
+<div th:insert="navMenu.html :: header"></div>
+<div class="container-fluid">
+    <h1>Rediger Kunde</h1>
 <form action="#" th:action="@{/updateCustomer/{id}(id=${customer.customer_id})}" th:object="${customer}" method="post">
     <table>
         <tr>
