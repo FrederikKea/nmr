@@ -9,11 +9,15 @@
 <form action="#" th:action="@{/updateBooking/{id}(id=${booking.order_id})}" th:object="${booking}" method="post">
     <table>
         <tr>
-            <td><label for="customers">Fornavn</label></td>
-            <td><input type="text" th:field="*{customers}" class="form-control" id="customers" placeholder="Fornavn"></td>
-            <td th:if="${#fields.hasErrors('customers')}" th:errors="*{customers}">Name Error</td>
+            <td><label for="customers">Vælg kunde</label></td>
+            <td><select name="customers" id="customers">
+                <option th:field="*{customers}"
+                        th:each="customer : ${customers}"
+                        th:text="${customer.firstName}"
+                        th:value="${customer.firstName}">
+                </option></select>
+            </td>
         </tr>
-
         <tr>
             <td><label for="motorhome">Motorhome</label></td>
             <!-- <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>-->

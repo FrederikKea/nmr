@@ -24,7 +24,7 @@ public class BookingController {
     BookingService bs = new BookingService();
     CustomerService cs = new CustomerService();
     MotorhomeService ms = new MotorhomeService();
-    ExtrasService er = new ExtrasService();
+    ExtrasService es = new ExtrasService();
 
 
     @GetMapping("opretbooking")
@@ -32,7 +32,7 @@ public class BookingController {
         model.addAttribute("booking", new Booking());
         model.addAttribute("customers", cs.readAllCustomers());
         model.addAttribute("motorhomes", ms.readAllMotorhomes());
-        model.addAttribute("extras", er.readAllExtras());
+        model.addAttribute("extras", es.readAllExtras());
         return "opretbooking";
     }
 
@@ -46,8 +46,9 @@ public class BookingController {
     public String showUpdateForm(@PathVariable("id") int id, Model model){
         Booking booking = bs.readOneBooking(id);
         model.addAttribute("booking", booking);
+        model.addAttribute("customers", cs.readAllCustomers());
         model.addAttribute("motorhomes", ms.readAllMotorhomes());
-        model.addAttribute("extras", er.readAllExtras());
+        model.addAttribute("extras", es.readAllExtras());
         return "redigerbooking";
     }
 

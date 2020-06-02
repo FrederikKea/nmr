@@ -11,6 +11,9 @@ import java.util.List;
 
 public class BookingService {
     BookingRepository br = new BookingRepository();
+    CustomerService cs = new CustomerService();
+    MotorhomeService ms = new MotorhomeService();
+    ExtrasService es = new ExtrasService();
 
     public void createBooking(Booking booking){
         br.createBooking(booking);
@@ -18,6 +21,10 @@ public class BookingService {
 
     public String validateandcreateBooking(Booking booking, BindingResult binding, Model model){
         if (binding.hasErrors()){
+            model.addAttribute("booking", booking);
+            model.addAttribute("customers", cs.readAllCustomers());
+            model.addAttribute("motorhomes", ms.readAllMotorhomes());
+            model.addAttribute("extras", es.readAllExtras());
             return "opretbooking";
         }
         br.createBooking(booking);
@@ -32,6 +39,10 @@ public class BookingService {
 
     public String validateandupdateBooking(Booking booking, BindingResult binding, Model model){
         if (binding.hasErrors()){
+            model.addAttribute("booking", booking);
+            model.addAttribute("customers", cs.readAllCustomers());
+            model.addAttribute("motorhomes", ms.readAllMotorhomes());
+            model.addAttribute("extras", es.readAllExtras());
             return "redigerbooking";
         }
         br.updateBooking(booking);
