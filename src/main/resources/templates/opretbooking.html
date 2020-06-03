@@ -87,12 +87,12 @@
                     </option>
                 </select>
             </td>
-            <td th:if="${#fields.hasErrors('extras')}" th:errors="*{extras}">Date of Birth Error</td>
+            <td th:if="${#fields.hasErrors('extras')}" th:errors="*{extras}">extras Error</td>
         </tr>
         <tr>
             <td><label for="comment">Kommentar</label></td>
             <td><input type="text" th:field="*{comment}" class="form-control" id="comment" placeholder="Kommentar"></td>
-            <td th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">Driverslicense Error</td>
+            <td th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}">comment Error</td>
         </tr>
         <tr>
             <td></td>

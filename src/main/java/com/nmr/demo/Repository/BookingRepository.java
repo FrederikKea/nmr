@@ -176,12 +176,7 @@ public class BookingRepository implements IBookingRepository {
                     "INNER JOIN nmr.address_table AS a_t ON order_table.order_pickup_id = a_t.address_id " +
                     "INNER JOIN nmr.address_table AS a_t2 ON order_table.order_dropoff_id = a_t2.address_id " +
                     "WHERE order_id=?; ";
-            /*
-            *  PreparedStatement myStatement = conn.prepareStatement(getCustomer);
-            myStatement.setInt(1,customer_id);
-            ResultSet rs = myStatement.executeQuery();
-            while (rs.next()) {
-                customerToReturn = new Customer(rs.getInt(1),*/
+
             PreparedStatement myStatement = conn.prepareStatement(readOneBooking);
             myStatement.setInt(1,order_id);
             ResultSet rs = myStatement.executeQuery();

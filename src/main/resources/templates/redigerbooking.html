@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:insert="navMenu.html :: header"></div>
-<div class="container-fluid">
+<div class="container-fluid"> </div>
     <h1>Rediger Booking</h1>
 <form action="#" th:action="@{/updateBooking/{id}(id=${booking.order_id})}" th:object="${booking}" method="post">
     <table>
@@ -22,7 +22,6 @@
         </tr>
         <tr>
             <td><label for="motorhome">Motorhome</label></td>
-            <!-- <td><input type="text" th:field="*{motorhome}" class="form-control" id="motorhome" placeholder="Motorhome Model"></td>-->
             <td>
                 <select name="motorhome" id="motorhome">
                     <option th:field="*{motorhome}"
@@ -41,7 +40,7 @@
         </tr>
         <tr>
             <td><label for="rentalStopTime">Slutdato</label></td>
-            <td><input type="date" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato"required oninvalid="this.setCustomValidity('Indtast en gyldig slutdato')" oninput="setCustomValidity('')"></td>
+            <td><input type="date" th:field="*{rentalStopTime}" class="form-control" id="rentalStopTime" placeholder="Slutdato" required oninvalid="this.setCustomValidity('Indtast en gyldig slutdato')" oninput="setCustomValidity('')"></td>
             <td th:if="${#fields.hasErrors('rentalStopTime')}" th:errors="*{rentalStopTime}">Cityname Error</td>
         </tr>
         <tr>

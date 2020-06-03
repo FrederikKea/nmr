@@ -43,7 +43,7 @@ public class CustomerRepository implements ICustomerRepository {
 
             preparedStatement.executeUpdate();
 
-            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_number)"
+            String query = "INSERT INTO nmr.customer_table(customer_address_id, customer_email_id, customer_phonenumber_id, customer_first_name, customer_last_name, customer_dob, customer_driverslicense_number)"
                     + "VALUES((SELECT address_id FROM nmr.address_table WHERE address_streetname = ? AND address_city = ?)," +
                     "(SELECT email_id FROM nmr.email_table WHERE email = ?)," +
                     "(SELECT phonenumber_id FROM nmr.phonenumber_table WHERE phonenumber = ?)," +
@@ -139,7 +139,7 @@ public class CustomerRepository implements ICustomerRepository {
     @Override
     public void updateCustomer(Customer c) {
         try {
-            String query = "UPDATE nmr.customer_table " +
+            String query = "UPDATE IGNORE nmr.customer_table " +
                     "INNER JOIN nmr.address_table ON customer_table.customer_address_id = address_table.address_id " +
                     "INNER JOIN nmr.email_table ON customer_table.customer_email_id = email_table.email_id " +
                     "INNER JOIN nmr.phonenumber_table ON customer_table.customer_phonenumber_id = phonenumber_table.phonenumber_id " +
